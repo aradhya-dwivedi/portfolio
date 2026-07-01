@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aradhya Dwivedi | Portfolio</title>
+
+    <!-- Theme flash-prevention: apply saved theme before first paint -->
+    <script>
+        (function () {
+            try {
+                var saved = localStorage.getItem('theme');
+                if (saved === 'light') {
+                    document.documentElement.classList.add('light-mode');
+                }
+            } catch (e) {}
+        })();
+    </script>
+
+    <!-- Tailwind CSS CDN for Executive Grid Systems -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- FontAwesome for Monochromatic Corporate Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts - Inter for premium Apple/Stripe-like typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-primary: #0b0f17;
+            --bg-secondary: #111827;
+            --bg-card: #1f2937;
+            --accent-blue: #3b82f6;
+            --accent-indigo: #6366f1;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --premium-bezier: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        html.light-mode {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #f1f5f9;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            overflow-x: hidden;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Smooth Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-blue);
+        }
+        /* Hide scrollbar for carousels but keep it scrollable */
+        .no-scrollbar::-webkit-scrollbar { height: 0; display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Standard Smooth Transition System */
+        .premium-transition {
+            transition: all 0.5s var(--premium-bezier);
+        }
+
+        /* Advanced Background Grid Mesh overlay */
+        .grid-bg-overlay {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(51, 65, 85, 0.08) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(51, 65, 85, 0.08) 1px, transparent 1px);
+        }
+
+        /* Radial glow spot to break flatness */
+        .radial-glow {
+            background: radial-gradient(circle 600px at 50% 200px, rgba(59, 130, 246, 0.05), transparent 80%);
+        }
+
+        /* Glassmorphism utility card layer */
+        .glass-card {
+            background: rgba(31, 41, 55, 0.45);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: background 0.4s ease, border-color 0.4s ease;
+        }
+
+        /* Custom Shimmer Effect */
+        @keyframes shimmer {
+            100% { transform: translateX(100%); }
+        }
+        .shimmer-trigger:hover::after {
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            transform: translateX(-100%);
+            background-image: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.03) 20%,
+                rgba(255, 255, 255, 0.06) 60%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            animation: shimmer 1.2s infinite;
+            content: '';
+        }
+
+        /* ============ THEME TOGGLE BUTTON ============ */
+        .theme-toggle-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(148, 163, 184, 0.08);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            color: #fbbf24;
+            transition: all 0.4s var(--premium-bezier);
+        }
+        .theme-toggle-btn:hover {
+            transform: rotate(20deg) scale(1.08);
+            border-color: var(--accent-blue);
+        }
+
+        /* ============ LIGHT MODE OVERRIDES ============
+           Tailwind utilities are used directly throughout the markup,
+           so light mode is achieved by re-mapping the slate palette
+           whenever html.light-mode is active. !important is required
+           to win over the utility classes' own specificity. */
+        html.light-mode .bg-slate-950 { background-color: #ffffff !important; }
+        html.light-mode .bg-slate-900,
+        html.light-mode .bg-slate-900\/20,
+        html.light-mode .bg-slate-900\/60 { background-color: #eef2f7 !important; }
+        html.light-mode .bg-slate-800,
+        html.light-mode .bg-slate-800\/40 { background-color: #e2e8f0 !important; }
+
+        html.light-mode .border-slate-800,
+        html.light-mode .border-slate-800\/50,
+        html.light-mode .border-slate-800\/60,
+        html.light-mode .border-slate-800\/80,
+        html.light-mode .border-slate-800\/40,
+        html.light-mode .border-slate-700 { border-color: #cbd5e1 !important; }
+        html.light-mode .border-slate-900 { border-color: #e2e8f0 !important; }
+        html.light-mode .hover\:border-slate-700:hover,
+        html.light-mode .hover\:border-slate-600:hover { border-color: #94a3b8 !important; }
+
+        html.light-mode .text-white { color: #0f172a !important; }
+        html.light-mode .text-slate-100,
+        html.light-mode .text-slate-200,
+        html.light-mode .text-slate-300 { color: #334155 !important; }
+        html.light-mode .text-slate-400 { color: #52606f !important; }
+        html.light-mode .text-slate-500 { color: #64748b !important; }
+        html.light-mode .text-slate-600 { color: #94a3b8 !important; }
+        html.light-mode .hover\:text-white:hover { color: #0f172a !important; }
+
+        html.light-mode .glass-card {
+            background: rgba(255, 255, 255, 0.65) !important;
+            border-color: rgba(15, 23, 42, 0.08) !important;
+        }
+        html.light-mode .grid-bg-overlay {
+            background-image: linear-gradient(to right, rgba(100, 116, 139, 0.10) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(100, 116, 139, 0.10) 1px, transparent 1px);
+        }
+        html.light-mode ::-webkit-scrollbar-thumb { background: #cbd5e1; }
+        html.light-mode .theme-toggle-btn { color: #4338ca; background: rgba(59,130,246,0.08); }
+
+        /* Keep the terminal window authentically dark in both themes */
+        html.light-mode .terminal-window.bg-slate-950 { background-color: #0b0f17 !important; }
+        html.light-mode .terminal-window .text-slate-300 { color: #cbd5e1 !important; }
+        html.light-mode .terminal-window .text-slate-400 { color: #94a3b8 !important; }
+        html.light-mode .terminal-window .text-slate-600 { color: #475569 !important; }
+        html.light-mode .terminal-window.border-slate-800 { border-color: #1e293b !important; }
+
+        /* ============ CAROUSEL ============ */
+        .carousel-track {
+            scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
+        }
+        .carousel-card {
+            scroll-snap-align: center;
+        }
+        .carousel-card:hover img {
+            transform: scale(1.06);
+        }
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 30;
+            width: 44px;
+            height: 44px;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            color: #f8fafc;
+            backdrop-filter: blur(6px);
+            transition: all 0.3s var(--premium-bezier);
+        }
+        .carousel-arrow:hover {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+        }
+        html.light-mode .carousel-arrow {
+            background: rgba(255, 255, 255, 0.85);
+            color: #0f172a;
+            border-color: rgba(15, 23, 42, 0.1);
+        }
+    </style>
+</head>
+<body class="antialiased relative select-none">
+
+    <!-- Ambient Grid Background Elements -->
+    <div class="absolute inset-0 grid-bg-overlay pointer-events-none z-0"></div>
+    <div class="absolute top-0 left-0 right-0 h-[1000px] radial-glow pointer-events-none z-0"></div>
+
+    <!-- 1. STICKY EXECUTIVE NAVIGATION BAR -->
+    <header class="sticky top-0 w-full z-50 glass-card border-b border-slate-800/50 backdrop-blur-md">
+        <nav class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center font-bold text-white shadow-lg shadow-blue-500/20">
+                    AD
+                </div>
+                <span class="font-semibold text-lg tracking-tight select-none">Aradhya<span class="text-blue-500 font-normal">.dev</span></span>
+            </div>
+
+            <div class="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide text-slate-300">
+                <a href="#home" class="hover:text-blue-500 premium-transition">Overview</a>
+                <a href="#education" class="hover:text-blue-500 premium-transition">Education</a>
+                <a href="#certifications" class="hover:text-blue-500 premium-transition">Credentials</a>
+                <a href="#projects" class="hover:text-blue-500 premium-transition">Works</a>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" onclick="toggleTheme()" class="theme-toggle-btn" title="Switch theme" aria-label="Toggle light and dark theme">
+                    <i id="theme-icon" class="fas fa-sun text-base"></i>
+                </button>
+
+                <a href="#connect" class="hidden sm:inline-block px-5 py-2.5 rounded-full bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 hover:border-slate-600 text-sm font-medium premium-transition shadow-sm">
+                    Contact Node
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="relative z-10 max-w-7xl mx-auto px-6 space-y-32 md:space-y-48 pt-12 pb-24">
+
+        <!-- 2. HIGH-END PREMIUM HERO SECTION -->
+        <section id="home" class="min-h-[70vh] flex flex-col justify-center items-center">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center w-full">
+
+                <!-- Left Details Framework -->
+                <div class="md:col-span-7 space-y-6 text-center md:text-left">
+                    <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-medium tracking-wider uppercase mx-auto md:mx-0">
+                        <span class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
+                        <span>Open to Collaborative Engagements</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight">
+                        Aradhya Dwivedi
+                    </h1>
+
+                    <p class="text-xl sm:text-2xl font-medium tracking-wide bg-gradient-to-r from-blue-400 via-indigo-400 to-slate-200 bg-clip-text text-transparent">
+                        Computer Science & Engineering Undergraduate
+                    </p>
+
+                    <div class="text-base text-slate-400 leading-relaxed max-w-2xl font-normal space-y-4">
+                        <p>
+                            Currently pursuing a <span class="text-white font-medium">B.Tech in CSE (2nd Year)</span> at <span class="text-white font-medium">Chhatrapati Shahu Ji Maharaj University (CSJMU)</span>. Focused on architectural software engineering logic, object-oriented paradigms, and data infrastructure models.
+                        </p>
+                    </div>
+
+                    <!-- Micro Terminal Object Showcase -->
+                    <div class="terminal-window w-full max-w-xl mx-auto md:mx-0 bg-slate-950 rounded-xl p-4 border border-slate-800 shadow-xl text-left mono text-xs text-slate-400 space-y-2">
+                        <div class="flex items-center space-x-2 pb-2 border-b border-slate-900">
+                            <span class="w-3 h-3 rounded-full bg-red-500/40"></span>
+                            <span class="w-3 h-3 rounded-full bg-yellow-500/40"></span>
+                            <span class="w-3 h-3 rounded-full bg-green-500/40"></span>
+                            <span class="text-slate-600 pl-2">system_diagnostics.sh</span>
+                        </div>
+                        <div><span class="text-blue-500">➜</span> <span class="text-indigo-400">~</span> current_status --academic</div>
+                        <div class="text-emerald-400 font-medium">>> Enrolled: B.Tech CSE [Year 2] @ CSJMU_Kanpur</div>
+                        <div><span class="text-blue-500">➜</span> <span class="text-indigo-400">~</span> core_competence --fetch</div>
+                        <div class="text-slate-300">>> ["C", "Java", "Data_Structures", "OOP_Methodologies"]</div>
+                    </div>
+
+                    <!-- Direct Connect Action Row -->
+                    <div class="flex flex-wrap justify-center md:justify-start gap-4 pt-4">
+                        <a href="#connect" class="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium text-sm hover:opacity-93 shadow-lg shadow-blue-500/10 premium-transition">
+                            Establish Connection
+                        </a>
+                        <a href="#certifications" class="px-6 py-3 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:bg-slate-800 font-medium text-sm premium-transition">
+                            Review Credentials
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Photo Container Frame Asset (profile.png) -->
+                <div class="md:col-span-5 flex justify-center items-center">
+                    <div class="relative group w-72 h-72 sm:w-80 sm:h-80 md:w-full md:max-w-[340px] aspect-square">
+                        <div class="absolute -inset-2 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl blur-xl opacity-20 group-hover:opacity-30 premium-transition"></div>
+
+                        <div class="w-full h-full rounded-2xl bg-slate-900 border border-slate-800 overflow-hidden relative z-10 p-3">
+                            <div class="w-full h-full rounded-xl overflow-hidden bg-slate-950 relative">
+                                <img src="profile.jpg" alt="Aradhya Dwivedi Profile" class="w-full h-full object-cover group-hover:scale-102 premium-transition opacity-90 group-hover:opacity-100" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+
+                                <div class="absolute inset-0 bg-slate-950 hidden flex-col items-center justify-center space-y-3 p-6 text-center">
+                                    <div class="w-16 h-16 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center text-xl font-bold text-blue-500">
+                                        AD
+                                    </div>
+                                    <span class="text-xs text-slate-500 font-medium">Profile Image Placeholder<br>(profile.png)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-blue-500/60 z-20 pointer-events-none rounded-tl-md"></div>
+                        <div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-indigo-500/60 z-20 pointer-events-none rounded-br-md"></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- 3. DETAILED STATS ROW -->
+        <section class="w-full">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 p-8 rounded-2xl border border-slate-800/60 bg-slate-900/20 backdrop-blur-sm">
+                <div class="text-center space-y-1">
+                    <div class="text-3xl font-bold tracking-tight text-white font-semibold">2<span class="text-blue-500 text-2xl font-normal">nd</span></div>
+                    <div class="text-xs font-medium tracking-wide uppercase text-slate-500">Year Academic Standing</div>
+                </div>
+                <div class="text-center space-y-1 border-l border-slate-800">
+                    <div class="text-3xl font-bold tracking-tight text-white font-semibold">2<span class="text-indigo-500 text-2xl font-normal">+</span></div>
+                    <div class="text-xs font-medium tracking-wide uppercase text-slate-500">Academic Programs Run</div>
+                </div>
+                <div class="text-center space-y-1 border-l border-slate-800">
+                    <div class="text-3xl font-bold tracking-tight text-white font-semibold">100<span class="text-blue-500 text-2xl font-normal">%</span></div>
+                    <div class="text-xs font-medium tracking-wide uppercase text-slate-500">Verified Credentials</div>
+                </div>
+                <div class="text-center space-y-1 border-l border-slate-800">
+                    <div class="text-3xl font-bold tracking-tight text-white font-semibold">2<span class="text-indigo-500 text-2xl font-normal">+</span></div>
+                    <div class="text-xs font-medium tracking-wide uppercase text-slate-500">Core Projects Handled</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 4. ACADEMIC JOURNEY SECTION (MINIMALIST TIMELINE) -->
+        <section id="education" class="space-y-12">
+            <div class="space-y-4 max-w-xl">
+                <div class="text-xs font-semibold tracking-widest text-blue-500 uppercase">Qualification Matrix</div>
+                <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Academic Timeline</h2>
+                <p class="text-sm text-slate-400">Formal educational tracking mapped chronologically across Chhatrapati Shahu Ji Maharaj University instances.</p>
+            </div>
+
+            <div class="relative border-l border-slate-800 max-w-4xl ml-4 md:ml-6 pl-8 md:pl-10 space-y-12 py-2">
+
+                <!-- Timeline Event 1: Present Core Enrolment -->
+                <div class="relative group">
+                    <div class="absolute -left-[41px] md:-left-[49px] top-1.5 w-6 h-6 rounded-full bg-slate-950 border-2 border-blue-500 flex items-center justify-center z-20 group-hover:border-blue-400 premium-transition">
+                        <div class="w-2 h-2 rounded-full bg-blue-500 animate-ping"></div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6 border border-slate-800/80 group-hover:border-slate-700/80 hover:shadow-xl hover:shadow-blue-500/[0.01] premium-transition relative overflow-hidden shimmer-trigger">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-slate-800/60">
+                            <div>
+                                <h3 class="text-lg font-bold text-white group-hover:text-blue-400 premium-transition">
+                                    Bachelor of Technology (B.Tech)
+                                </h3>
+                                <p class="text-sm font-medium text-slate-300 pt-0.5">Computer Science & Engineering</p>
+                            </div>
+                            <div class="inline-flex px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-semibold uppercase tracking-wider self-start sm:self-center">
+                                2025 - Present
+                            </div>
+                        </div>
+
+                        <div class="pt-4 space-y-3 text-sm text-slate-400 font-normal">
+                            <p class="flex items-center space-x-2 text-slate-300 font-medium">
+                                <i class="fas fa-university text-blue-500 text-xs"></i>
+                                <span>Chhatrapati Shahu Ji Maharaj University (CSJMU), Kanpur</span>
+                            </p>
+                            <p class="leading-relaxed">
+                                Currently focusing on professional engineering streams. Core operational subjects include Object-Oriented Programming models via Java, custom data structures setups, discrete computing mathematics, and algorithmic complexity parameters.
+                            </p>
+                            <div class="pt-2 flex flex-wrap gap-2">
+                                <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800/80 text-xs text-slate-400 tracking-wide">2nd Year Standee</span>
+                                <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800/80 text-xs text-slate-400 tracking-wide">CSE Domain Core</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Event 2: Prior Foundations -->
+                <div class="relative group">
+                    <div class="absolute -left-[41px] md:-left-[49px] top-1.5 w-6 h-6 rounded-full bg-slate-950 border-2 border-slate-800 flex items-center justify-center z-20 group-hover:border-slate-600 premium-transition">
+                        <div class="w-2 h-2 rounded-full bg-slate-700 group-hover:bg-slate-500 premium-transition"></div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6 border border-slate-800/80 group-hover:border-slate-700/80 hover:shadow-xl hover:shadow-indigo-500/[0.01] premium-transition relative overflow-hidden shimmer-trigger">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-slate-800/60">
+                            <div>
+                                <h3 class="text-lg font-bold text-white group-hover:text-indigo-400 premium-transition">
+                                    Bachelor of Science (B.Sc)
+                                </h3>
+                                <p class="text-sm font-medium text-slate-300 pt-0.5">Computer Science Foundations</p>
+                            </div>
+                            <div class="inline-flex px-3 py-1 rounded-full bg-slate-800 text-slate-400 text-xs font-semibold uppercase tracking-wider self-start sm:self-center">
+                                2024 - 2025
+                            </div>
+                        </div>
+
+                        <div class="pt-4 space-y-3 text-sm text-slate-400 font-normal">
+                            <p class="flex items-center space-x-2 text-slate-300 font-medium">
+                                <i class="fas fa-university text-indigo-500 text-xs"></i>
+                                <span>Chhatrapati Shahu Ji Maharaj University (CSJMU), Kanpur</span>
+                            </p>
+                            <p class="leading-relaxed">
+                                Completed one foundational academic year studying computer science theory models, basic matrix algebra processing, and functional electronics elements prior to shifting tracks into advanced engineering.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- 5. REFRESHED DYNAMIC CERTIFICATIONS SHEET -->
+        <section id="certifications" class="space-y-12">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div class="space-y-4 max-w-xl">
+                    <div class="text-xs font-semibold tracking-widest text-blue-500 uppercase">Credential Modules</div>
+                    <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Certifications & Badges</h2>
+                    <p class="text-sm text-slate-400">Swipe through official credentials — each card carries direct, independent verification routing.</p>
+                </div>
+                <div class="text-xs text-slate-500 font-medium mono whitespace-nowrap bg-slate-900/60 px-3 py-1.5 rounded-lg border border-slate-800/40">
+                    Smart Fallback System: <span class="text-emerald-400">ACTIVE</span>
+                </div>
+            </div>
+
+            <!-- SUB-SECTION A: PLATFORM CERTIFICATES — AMAZON-STYLE IMAGE CAROUSEL -->
+            <div class="space-y-8">
+                <h3 class="text-xs font-semibold tracking-wider uppercase text-slate-400 flex items-center space-x-2">
+                    <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+                    <span>Certifications</span>
+                </h3>
+
+                <!-- Carousel Wrapper -->
+                <div class="relative">
+                    <button onclick="scrollCarousel('cert-carousel', -1)" class="carousel-arrow -left-2 md:-left-5" aria-label="Scroll certificates left">
+                        <i class="fas fa-chevron-left text-sm"></i>
+                    </button>
+
+                    <div id="cert-carousel" class="carousel-track flex gap-6 overflow-x-auto no-scrollbar pb-4 px-1 scroll-px-1">
+
+                        <!-- Certificate Card 1 -->
+                        <div class="carousel-card group glass-card shrink-0 w-72 sm:w-80 rounded-2xl border border-slate-800/80 hover:border-slate-700/80 premium-transition overflow-hidden">
+                            <div class="w-full h-48 bg-slate-950 overflow-hidden relative">
+                                <!-- Apni certificate image ka path yahan lagayein (e.g., cert1.png) -->
+                                <img src="cert1.png" alt="Microsoft Certificate" class="w-full h-full object-cover premium-transition" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="absolute inset-0 bg-gradient-to-br from-slate-900 to-slate-950 hidden flex-col items-center justify-center text-center p-4">
+                                    <i class="fas fa-file-certificate text-slate-700 text-3xl mb-1"></i>
+                                    <span class="text-[10px] text-slate-500 font-medium">Certificate Image Link<br>(cert1.png)</span>
+                                </div>
+                            </div>
+                            <div class="p-5 space-y-3">
+                                <h4 class="text-base font-bold text-white group-hover:text-blue-400 premium-transition leading-snug">Build a computer vision app with Azure Cognitive Services</h4>
+                                <p class="text-xs text-slate-400 leading-relaxed">An online project authorized by Microsoft and offered through Coursera.</p>
+                                <!-- Apni verification link yahan add karein -->
+                                <a href="https://www.coursera.org/account/accomplishments/verify/E72PKAIINUA9" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-slate-900 hover:bg-blue-600 border border-slate-800 hover:border-blue-500 text-slate-300 hover:text-white font-medium text-xs tracking-wider uppercase premium-transition w-full justify-center">
+                                    <span>Verify Certificate</span>
+                                    <i class="fas fa-arrow-up-right-from-square text-[9px]"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Certificate Card 2 -->
+                        <div class="carousel-card group glass-card shrink-0 w-72 sm:w-80 rounded-2xl border border-slate-800/80 hover:border-slate-700/80 premium-transition overflow-hidden">
+                            <div class="w-full h-48 bg-slate-950 overflow-hidden relative">
+                                <img src="cert2.png" alt="Microsoft Certificate" class="w-full h-full object-cover premium-transition" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="absolute inset-0 bg-gradient-to-br from-slate-900 to-slate-950 hidden flex-col items-center justify-center text-center p-4">
+                                    <i class="fas fa-file-certificate text-slate-700 text-3xl mb-1"></i>
+                                    <span class="text-[10px] text-slate-500 font-medium">Certificate Image Link<br>(cert2.png)</span>
+                                </div>
+                            </div>
+                            <div class="p-5 space-y-3">
+                                <h4 class="text-base font-bold text-white group-hover:text-indigo-400 premium-transition leading-snug">Introduction to Prompt Engineering with GitHub Copilot</h4>
+                                <p class="text-xs text-slate-400 leading-relaxed">An online project authorized by Microsoft and offered through Simplilearn.</p>
+                                <a href="https://simpli-web.app.link/e/OoeOILgdq4b" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-slate-900 hover:bg-indigo-600 border border-slate-800 hover:border-indigo-500 text-slate-300 hover:text-white font-medium text-xs tracking-wider uppercase premium-transition w-full justify-center">
+                                    <span>Verify Certificate</span>
+                                    <i class="fas fa-arrow-up-right-from-square text-[9px]"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Certificate Card 3 -->
+                        <div class="carousel-card group glass-card shrink-0 w-72 sm:w-80 rounded-2xl border border-slate-800/80 hover:border-slate-700/80 premium-transition overflow-hidden">
+                            <div class="w-full h-48 bg-slate-950 overflow-hidden relative">
+                                <img src="cert3.png" alt="Cisco Certificate" class="w-full h-full object-cover premium-transition" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="absolute inset-0 bg-gradient-to-br from-slate-900 to-slate-950 hidden flex-col items-center justify-center text-center p-4">
+                                    <i class="fas fa-file-certificate text-slate-700 text-3xl mb-1"></i>
+                                    <span class="text-[10px] text-slate-500 font-medium">Certificate Image Link<br>(cert3.png)</span>
+                                </div>
+                            </div>
+                            <div class="p-5 space-y-3">
+                                <h4 class="text-base font-bold text-white group-hover:text-blue-400 premium-transition leading-snug">Python Essentials 1</h4><br>
+                                <p class="text-xs text-slate-400 leading-relaxed">Offered by Networking Academy through the Cisco Networking Academy program.</p>
+                                <a href="https://www.netacad.com/certificates/?issuanceId=b1f2deef-ac58-4241-b07e-e9266aa16ecf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-slate-900 hover:bg-blue-600 border border-slate-800 hover:border-blue-500 text-slate-300 hover:text-white font-medium text-xs tracking-wider uppercase premium-transition w-full justify-center">
+                                    <span>Verify Certificate</span>
+                                    <i class="fas fa-arrow-up-right-from-square text-[9px]"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                         <!-- Certificate Card 4 -->
+                        <div class="carousel-card group glass-card shrink-0 w-72 sm:w-80 rounded-2xl border border-slate-800/80 hover:border-slate-700/80 premium-transition overflow-hidden">
+                            <div class="w-full h-48 bg-slate-950 overflow-hidden relative">
+                                <img src="cert4.png" alt="Cisco Certificate" class="w-full h-full object-cover premium-transition" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="absolute inset-0 bg-gradient-to-br from-slate-900 to-slate-950 hidden flex-col items-center justify-center text-center p-4">
+                                    <i class="fas fa-file-certificate text-slate-700 text-3xl mb-1"></i>
+                                    <span class="text-[10px] text-slate-500 font-medium">Certificate Image Link<br>(cert3.png)</span>
+                                </div>
+                            </div>
+                            <div class="p-5 space-y-3">
+                                <h4 class="text-base font-bold text-white group-hover:text-blue-400 premium-transition leading-snug">Introduction to Cybersecurity</h4><br>
+                                <p class="text-xs text-slate-400 leading-relaxed">Offered by Networking Academy through the Cisco Networking Academy program.</p>
+                                <a href="https://www.netacad.com/certificates/?issuanceId=b1f2deef-ac58-4241-b07e-e9266aa16ecf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-slate-900 hover:bg-blue-600 border border-slate-800 hover:border-blue-500 text-slate-300 hover:text-white font-medium text-xs tracking-wider uppercase premium-transition w-full justify-center">
+                                    <span>Verify Certificate</span>
+                                    <i class="fas fa-arrow-up-right-from-square text-[9px]"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Add more certificate cards here by duplicating the block above -->
+
+                    </div>
+
+                    <button onclick="scrollCarousel('cert-carousel', 1)" class="carousel-arrow -right-2 md:-right-5" aria-label="Scroll certificates right">
+                        <i class="fas fa-chevron-right text-sm"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- SUB-SECTION B: CREDLY BADGES — SHOWN WITH IMAGES IN-PAGE -->
+            <div class="space-y-6 pt-6">
+                <h3 class="text-xs font-semibold tracking-wider uppercase text-slate-400 flex items-center space-x-2">
+                    <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                    <span>Global Digital Badges (Credly Verified)</span>
+                </h3>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+
+                    <!-- Badge Card 1 -->
+                    <div class="group glass-card rounded-2xl p-5 border border-slate-800/80 hover:border-slate-700/80 premium-transition flex flex-col items-center text-center space-y-3">
+                        <div class="w-24 h-24 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-center overflow-hidden relative">
+                            <!-- Apni badge image ka path yahan lagayein (e.g., badge1.png) -->
+                            <img src="badge1.png" alt="Badge 1" class="w-full h-full object-contain p-2 group-hover:scale-105 premium-transition" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="absolute inset-0 hidden flex-col items-center justify-center text-blue-500">
+                                <i class="fas fa-shield-alt text-2xl"></i>
+                            </div>
+                        </div>
+                        <div class="space-y-1">
+                            <h5 class="text-sm font-bold text-white">Python Essentials 1</h5>
+                            <p class="text-[11px] text-slate-500 mono uppercase tracking-wide">Cisco</p>
+                        </div>
+                        <!-- Apni Credly badge verification link yahan add karein -->
+                        <a href="https://www.credly.com/badges/1c049ab1-709b-4dee-ac0a-95913fe76295/public_url" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center space-x-1.5 px-3 py-2 rounded-lg bg-slate-900 hover:bg-blue-600 border border-slate-800 hover:border-blue-500 text-slate-300 hover:text-white font-medium text-[10px] tracking-wider uppercase premium-transition">
+                            <span>Verify</span>
+                            <i class="fas fa-arrow-up-right-from-square text-[8px]"></i>
+                        </a>
+                    </div>
+
+                    <!-- Badge Card 2 -->
+                    <div class="group glass-card rounded-2xl p-5 border border-slate-800/80 hover:border-slate-700/80 premium-transition flex flex-col items-center text-center space-y-3">
+                        <div class="w-24 h-24 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-center overflow-hidden relative">
+                            <img src="badge2.png" alt="Badge 2" class="w-full h-full object-contain p-2 group-hover:scale-105 premium-transition" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="absolute inset-0 hidden flex-col items-center justify-center text-indigo-500">
+                                <i class="fas fa-shield-alt text-2xl"></i>
+                            </div>
+                        </div>
+                        <div class="space-y-1">
+                            <h5 class="text-sm font-bold text-white">AI Skills Fest 2026</h5>
+                            <p class="text-[11px] text-slate-500 mono uppercase tracking-wide">Microsoft</p>
+                        </div>
+                        <a href="https://www.credly.com/badges/38c6d040-12f8-4106-a671-e11b2f6156f8/public_url" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center space-x-1.5 px-3 py-2 rounded-lg bg-slate-900 hover:bg-indigo-600 border border-slate-800 hover:border-indigo-500 text-slate-300 hover:text-white font-medium text-[10px] tracking-wider uppercase premium-transition">
+                            <span>Verify</span>
+                            <i class="fas fa-arrow-up-right-from-square text-[8px]"></i>
+                        </a>
+                    </div>
+
+                    <!-- Badge Card 3 -->
+                    <div class="group glass-card rounded-2xl p-5 border border-slate-800/80 hover:border-slate-700/80 premium-transition flex flex-col items-center text-center space-y-3">
+                        <div class="w-24 h-24 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-center overflow-hidden relative">
+                            <img src="badge3.png" alt="Badge 3" class="w-full h-full object-contain p-2 group-hover:scale-105 premium-transition" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="absolute inset-0 hidden flex-col items-center justify-center text-blue-500">
+                                <i class="fas fa-shield-alt text-2xl"></i>
+                            </div>
+                        </div>
+                        <div class="space-y-1">
+                            <h5 class="text-sm font-bold text-white">Introduction to Cybersecurity</h5>
+                            <p class="text-[11px] text-slate-500 mono uppercase tracking-wide">Cisco</p>
+                        </div>
+                        <a href="https://www.credly.com/badges/a59c267c-8370-479f-a0c0-fcaf9778f11c/public_url" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center space-x-1.5 px-3 py-2 rounded-lg bg-slate-900 hover:bg-blue-600 border border-slate-800 hover:border-blue-500 text-slate-300 hover:text-white font-medium text-[10px] tracking-wider uppercase premium-transition">
+                            <span>Verify</span>
+                            <i class="fas fa-arrow-up-right-from-square text-[8px]"></i>
+                        </a>
+                    </div>
+
+                    <!-- Badge Card 4 -->
+                    <div class="group glass-card rounded-2xl p-5 border border-slate-800/80 hover:border-slate-700/80 premium-transition flex flex-col items-center text-center space-y-3">
+                        <div class="w-24 h-24 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-center overflow-hidden relative">
+                            <img src="badge4.png" alt="Badge 4" class="w-full h-full object-contain p-2 group-hover:scale-105 premium-transition" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="absolute inset-0 hidden flex-col items-center justify-center text-indigo-500">
+                                <i class="fas fa-shield-alt text-2xl"></i>
+                            </div>
+                        </div>
+                        <div class="space-y-1">
+                            <h5 class="text-sm font-bold text-white">Badge Name Here</h5>
+                            <p class="text-[11px] text-slate-500 mono uppercase tracking-wide">Issuer Name</p>
+                        </div>
+                        <a href="https://www.credly.com" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center space-x-1.5 px-3 py-2 rounded-lg bg-slate-900 hover:bg-indigo-600 border border-slate-800 hover:border-indigo-500 text-slate-300 hover:text-white font-medium text-[10px] tracking-wider uppercase premium-transition">
+                            <span>Verify</span>
+                            <i class="fas fa-arrow-up-right-from-square text-[8px]"></i>
+                        </a>
+                    </div>
+
+                    <!-- Add more badge cards here by duplicating a block above (badge5.png, badge6.png ...) -->
+
+                </div>
+
+                <!-- Optional: full Credly profile link -->
+                <div class="w-full glass-card border border-slate-800/80 rounded-2xl p-5 flex flex-col md:flex-row items-center justify-between gap-4 relative overflow-hidden shimmer-trigger">
+                    <div class="flex items-center space-x-4 text-left">
+                        <div class="w-10 h-10 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-center text-blue-500 text-lg shrink-0">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <p class="text-sm text-slate-400">See every badge in one place on the full Credly profile.</p>
+                    </div>
+                    <!-- Apni Credly profile link yahan add karein -->
+                    <a href="https://www.credly.com/users/aradhya-dwivedi" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-xl bg-blue-600/10 hover:bg-blue-600 border border-blue-500/30 text-blue-400 hover:text-white font-medium text-xs tracking-wider uppercase whitespace-nowrap premium-transition shadow-sm flex items-center space-x-2 w-full md:w-auto justify-center">
+                        <span>Open Full Credly Profile</span>
+                        <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 6. SELECTED WORKS / REPOSITORIES -->
+        <section id="projects" class="space-y-12">
+            <div class="space-y-4 max-w-xl">
+                <div class="text-xs font-semibold tracking-widest text-blue-500 uppercase">Functional Architectures</div>
+                <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Engineering Projects</h2>
+                <p class="text-sm text-slate-400">Selected codebases mapping theoretical computing modules into functional application logic. Full source lives in one demo repository, each project ships with a live preview.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+
+                <!-- Project 1: Creative Coding Three.js Simulator -->
+                <div class="group glass-card rounded-2xl overflow-hidden border border-slate-800/80 hover:border-slate-700/80 premium-transition">
+                    <div class="h-44 bg-slate-950 border-b border-slate-900 relative p-6 flex flex-col justify-between overflow-hidden">
+                        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px] group-hover:scale-105 premium-transition"></div>
+                        <div class="flex justify-between items-center relative z-10">
+                            <div class="w-10 h-10 rounded-lg bg-blue-600/10 border border-blue-500/20 flex items-center justify-center text-blue-400 text-sm font-semibold">3D</div>
+                            <span class="text-[10px] text-emerald-400 font-medium tracking-widest uppercase mono bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">Active Engine</span>
+                        </div>
+                        <div class="mono text-xs text-slate-600 relative z-10">mandir.html</div>
+                    </div>
+
+                    <div class="p-6 space-y-4">
+                        <h3 class="text-lg font-bold text-white group-hover:text-blue-400 premium-transition tracking-tight">Interactive 3D Simulation Engine</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed font-normal">
+                            Developed a interactive temple website using <span class="text-slate-200">html</span>. Manages Donation system, generating recipts, and browse other details.
+                        </p>
+
+                        <div class="pt-2 flex flex-wrap gap-2 text-xs font-medium text-slate-400">
+                            <span class="px-2 py-1 rounded bg-slate-900 border border-slate-800/60">HTML</span>
+                            <span class="px-2 py-1 rounded bg-slate-900 border border-slate-800/60">JavaScript API</span>
+                            <span class="px-2 py-1 rounded bg-slate-900 border border-slate-800/60">WebGL Framework</span>
+                        </div>
+
+                        <!-- Yahan apni specific demo-repo folder link aur live-hosted link daalein -->
+                        <div class="pt-4 border-t border-slate-800/40 flex items-center gap-3 text-sm font-medium">
+                            <a href="https://github.com/aradhya-dwivedi/batman" target="_blank" rel="noopener noreferrer" class="flex-1 inline-flex items-center justify-center space-x-2 px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-600 text-slate-300 hover:text-white premium-transition text-xs uppercase tracking-wide">
+                                <i class="fab fa-github text-sm"></i>
+                                <span>View Code</span>
+                            </a>
+                            <a href="https://aradhya-dwivedi.github.io/batman/" target="_blank" rel="noopener noreferrer" class="flex-1 inline-flex items-center justify-center space-x-2 px-3 py-2.5 rounded-xl bg-blue-600/10 border border-blue-500/30 text-blue-400 hover:bg-blue-600 hover:text-white premium-transition text-xs uppercase tracking-wide">
+                                <i class="fas fa-eye text-sm"></i>
+                                <span>Live Demo</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Java Algorithmic Stack -->
+                <div class="group glass-card rounded-2xl overflow-hidden border border-slate-800/80 hover:border-slate-700/80 premium-transition">
+                    <div class="h-44 bg-slate-950 border-b border-slate-900 relative p-6 flex flex-col justify-between overflow-hidden">
+                        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#6366f1_1px,transparent_1px)] [background-size:16px_16px] group-hover:scale-105 premium-transition"></div>
+                        <div class="flex justify-between items-center relative z-10">
+                            <div class="w-10 h-10 rounded-lg bg-indigo-600/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 text-sm font-semibold">ALG</div>
+                            <span class="text-[10px] text-slate-500 font-medium tracking-widest uppercase mono bg-slate-900 px-2 py-0.5 rounded border border-slate-800">Verified Base</span>
+                        </div>
+                        <div class="mono text-xs text-slate-600 relative z-10">matrix_processor.java</div>
+                    </div>
+
+                    <div class="p-6 space-y-4">
+                        <h3 class="text-lg font-bold text-white group-hover:text-indigo-400 premium-transition tracking-tight">Data Architecture Algorithmic Core</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed font-normal">
+                            Designed structural backend tracking matrixes using <span class="text-slate-200">Java</span> computing memory layout nodes, functional stack pipelines, linear tree tracers, and mathematical evaluation functions optimized for zero data leak compilation.
+                        </p>
+
+                        <div class="pt-2 flex flex-wrap gap-2 text-xs font-medium text-slate-400">
+                            <span class="px-2 py-1 rounded bg-slate-900 border border-slate-800/60">Java Engine</span>
+                            <span class="px-2 py-1 rounded bg-slate-900 border border-slate-800/60">Algorithmic Arrays</span>
+                            <span class="px-2 py-1 rounded bg-slate-900 border border-slate-800/60">Data Infrastructure</span>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-800/40 flex items-center gap-3 text-sm font-medium">
+                            <a href="https://github.com/aradhya-dwivedi/demo-projects/tree/main/java-algorithmic-core" target="_blank" rel="noopener noreferrer" class="flex-1 inline-flex items-center justify-center space-x-2 px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-600 text-slate-300 hover:text-white premium-transition text-xs uppercase tracking-wide">
+                                <i class="fab fa-github text-sm"></i>
+                                <span>View Code</span>
+                            </a>
+                            <a href="https://aradhya-dwivedi.github.io/demo-projects/java-algorithmic-core" target="_blank" rel="noopener noreferrer" class="flex-1 inline-flex items-center justify-center space-x-2 px-3 py-2.5 rounded-xl bg-indigo-600/10 border border-indigo-500/30 text-indigo-400 hover:bg-indigo-600 hover:text-white premium-transition text-xs uppercase tracking-wide">
+                                <i class="fas fa-eye text-sm"></i>
+                                <span>Live Demo</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- 8. PROFESSIONAL MONOCHROMATIC CONNECT FOOTER -->
+    <footer id="connect" class="bg-slate-950 border-t border-slate-900 relative z-10">
+        <div class="max-w-7xl mx-auto px-6 py-16 space-y-12">
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center pb-12 border-b border-slate-900">
+                <div class="md:col-span-6 space-y-3 text-center md:text-left">
+                    <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Establish Connection Node</h2>
+                    <p class="text-sm text-slate-400 max-w-md">Reach out for core technical collaborations, code auditing, or system engineering assignments.</p>
+                </div>
+
+                <div class="md:col-span-6 flex justify-center md:justify-end items-center gap-6">
+                    <!-- GitHub Link -->
+                    <a href="https://github.com/aradhya-dwivedi" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-800 hover:border-slate-700 hover:shadow-lg hover:shadow-white/[0.02] premium-transition text-xl" title="Open GitHub Interface">
+                        <i class="fab fa-github"></i>
+                    </a>
+
+                    <!-- LinkedIn Link -->
+                    <a href="https://linkedin.com/in/dwivediiaradhya" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-[#0077b5] hover:bg-slate-800 hover:border-slate-700 hover:shadow-lg hover:shadow-blue-500/[0.02] premium-transition text-xl" title="Open LinkedIn Network">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+
+                    <!-- Gmail Link -->
+                    <a href="mailto:dwivediiaradhya@gmail.com" class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-[#ea4335] hover:bg-slate-800 hover:border-slate-700 hover:shadow-lg hover:shadow-red-500/[0.02] premium-transition text-xl" title="Trigger Email Channel Instance">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Academic Footer Attributions System Info -->
+            <div class="flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 gap-4 mono">
+                <div class="space-y-1 text-center sm:text-left">
+                    <div>Operator Identity: Aradhya Dwivedi</div>
+                    <div class="text-slate-600">B.Tech CSE Undergraduate Instance • CSJMU Enrollment</div>
+                </div>
+                <div class="text-center sm:text-right space-y-1">
+                    <div>© 2026 Aradhya Dwivedi. All Rights Reserved.</div>
+                    <div class="text-slate-600">Built via Semantic System Modules • Executive Design Grade</div>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <script>
+        function updateThemeIcon() {
+            var icon = document.getElementById('theme-icon');
+            var isLight = document.documentElement.classList.contains('light-mode');
+            icon.className = isLight ? 'fas fa-moon text-base' : 'fas fa-sun text-base';
+        }
+
+        function toggleTheme() {
+            document.documentElement.classList.toggle('light-mode');
+            var isLight = document.documentElement.classList.contains('light-mode');
+            try { localStorage.setItem('theme', isLight ? 'light' : 'dark'); } catch (e) {}
+            updateThemeIcon();
+        }
+
+        function scrollCarousel(id, direction) {
+            var track = document.getElementById(id);
+            var card = track.querySelector('.carousel-card');
+            var gap = 24; // matches gap-6
+            var distance = card ? card.offsetWidth + gap : 320;
+            track.scrollBy({ left: direction * distance, behavior: 'smooth' });
+        }
+
+        document.addEventListener('DOMContentLoaded', updateThemeIcon);
+    </script>
+
+</body>
+</html>
