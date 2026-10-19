@@ -1,415 +1,580 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Aradhya Dwivedi, B.Tech CSE student at CSJMU Kanpur. Certifications, badges and projects.">
     <title>Aradhya Dwivedi | Portfolio</title>
 
-    <!-- Theme flash-prevention: apply saved theme before first paint -->
+    <!-- Theme flash-prevention: light by default, dark only if the visitor chose it -->
     <script>
         (function () {
             try {
-                var saved = localStorage.getItem('theme');
-                if (saved === 'light') {
-                    document.documentElement.classList.add('light-mode');
+                if (localStorage.getItem('theme') === 'dark') {
+                    document.documentElement.classList.add('dark-mode');
                 }
             } catch (e) {}
         })();
     </script>
 
-    <!-- Tailwind CSS CDN for Executive Grid Systems -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-    <!-- FontAwesome for Monochromatic Corporate Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Google Fonts - Inter for premium Apple/Stripe-like typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
+        /* ============ TOKENS ============ */
         :root {
-            --bg-primary: #0b0f17;
-            --bg-secondary: #111827;
-            --bg-card: #1f2937;
-            --accent-blue: #3b82f6;
-            --accent-indigo: #6366f1;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --premium-bezier: cubic-bezier(0.16, 1, 0.3, 1);
+            --bg: #ffffff;
+            --soft: #f5f6f8;
+            --line: #e3e6eb;
+            --text: #14181f;
+            --muted: #5b6472;
+            --accent: #2457d6;
+            --accent-soft: #e8eefc;
+            --on-accent: #ffffff;
+            --ok: #1f9d55;
+            --font: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --gutter: clamp(1.25rem, 4vw, 2rem);
+        }
+        html.dark-mode {
+            --bg: #0f1217;
+            --soft: #171b22;
+            --line: #272d38;
+            --text: #eceff4;
+            --muted: #98a1b0;
+            --accent: #6c9bff;
+            --accent-soft: #1b2540;
+            --on-accent: #0f1217;
+            --ok: #4ade80;
         }
 
-        html.light-mode {
-            --bg-primary: #f8fafc;
-            --bg-secondary: #f1f5f9;
-            --bg-card: #ffffff;
-            --text-main: #0f172a;
-            --text-muted: #475569;
-        }
-
+        /* ============ BASE ============ */
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text-main);
+            margin: 0;
+            font-family: var(--font);
+            font-size: 1rem;
+            line-height: 1.65;
+            color: var(--text);
+            background: var(--bg);
             overflow-x: hidden;
-            transition: background-color 0.4s ease, color 0.4s ease;
         }
+        img { display: block; max-width: 100%; }
+        .ic { width: 1em; height: 1em; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; vertical-align: -0.125em; }
+        .icon-sun { display: none; }
+        html.dark-mode .icon-sun { display: inline-block; }
+        html.dark-mode .icon-moon { display: none; }
+        a { color: inherit; text-decoration: none; }
+        h1, h2, h3, h4, p, ul { margin: 0; padding: 0; }
+        ul { list-style: none; }
+        section[id], footer[id] { scroll-margin-top: 72px; }
+        :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+        ::selection { background: var(--accent); color: var(--on-accent); }
 
-        .mono {
-            font-family: 'JetBrains Mono', monospace;
-        }
+        .wrap { width: 100%; max-width: 1040px; margin: 0 auto; padding: 0 var(--gutter); }
+        .section { padding: clamp(3.5rem, 7vw, 5.5rem) 0; border-top: 1px solid var(--line); }
+        h2 { display: flex; align-items: center; gap: 0.75rem; font-size: clamp(1.6rem, 3.4vw, 2.1rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; }
+        .h-icon { flex: none; width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); font-size: 1rem; }
+        .sub { color: var(--muted); margin-top: 0.4rem; }
+        .section-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1rem; margin-bottom: 1.75rem; }
+        h3.group { display: flex; align-items: center; gap: 0.5rem; font-size: 1.15rem; font-weight: 700; }
+        h3.group .ic { color: var(--accent); font-size: 0.95rem; }
 
-        /* Smooth Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
+        /* ============ BUTTONS ============ */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            border-radius: 8px;
+            font-family: inherit; font-size: 0.92rem; font-weight: 600; line-height: 1.2;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
         }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-primary);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-blue);
-        }
-        /* Hide scrollbar for carousels but keep it scrollable */
-        .no-scrollbar::-webkit-scrollbar { height: 0; display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .btn .ic { font-size: 0.75em; }
+        .btn-solid { background: var(--accent); color: var(--on-accent); }
+        .btn-solid:hover { opacity: 0.9; }
+        .btn-line { border-color: var(--line); background: var(--bg); color: var(--text); }
+        .btn-line:hover { border-color: var(--accent); color: var(--accent); }
+        .btn-sm { padding: 0.55rem 0.95rem; font-size: 0.85rem; }
 
-        /* Standard Smooth Transition System */
-        .premium-transition {
-            transition: all 0.5s var(--premium-bezier);
+        /* ============ NAV ============ */
+        .nav { position: sticky; top: 0; z-index: 50; background: var(--bg); border-bottom: 1px solid var(--line); }
+        .nav-inner { height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+        .brand { font-weight: 700; font-size: 1.05rem; letter-spacing: -0.01em; }
+        .nav-right { display: flex; align-items: center; gap: 1.75rem; }
+        .nav-links { display: flex; gap: 1.5rem; font-size: 0.92rem; color: var(--muted); font-weight: 500; }
+        .nav-links a:hover { color: var(--text); }
+        .theme-btn {
+            width: 38px; height: 38px; border-radius: 8px;
+            display: grid; place-items: center;
+            border: 1px solid var(--line); background: var(--bg); color: var(--text);
+            cursor: pointer;
         }
+        .theme-btn:hover { border-color: var(--accent); color: var(--accent); }
 
-        /* Advanced Background Grid Mesh overlay */
-        .grid-bg-overlay {
-            background-size: 40px 40px;
-            background-image: linear-gradient(to right, rgba(51, 65, 85, 0.08) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(51, 65, 85, 0.08) 1px, transparent 1px);
+        /* ============ HERO ============ */
+        .hero { padding: clamp(3rem, 7vw, 5.5rem) 0; }
+        .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: clamp(2rem, 6vw, 4.5rem); align-items: center; }
+        .status { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.88rem; color: var(--muted); margin-bottom: 1rem; }
+        .status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--ok); }
+        .hero h1 { font-size: clamp(2.4rem, 6vw, 3.8rem); font-weight: 700; line-height: 1.08; letter-spacing: -0.03em; }
+        .role { font-size: 1.2rem; font-weight: 500; color: var(--accent); margin-top: 0.6rem; }
+        .intro { color: var(--muted); max-width: 52ch; margin-top: 1.1rem; }
+        .skills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.3rem; }
+        .skills li { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.25rem 0.75rem; background: var(--soft); border: 1px solid var(--line); border-radius: 999px; font-size: 0.85rem; font-weight: 500; }
+        .hero-actions { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1.8rem; }
+
+        .photo { position: relative; width: 100%; aspect-ratio: 1; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); background: var(--soft); }
+        .photo img { width: 100%; height: 100%; object-fit: cover; }
+        .fallback {
+            display: none;
+            position: absolute; inset: 0;
+            flex-direction: column; align-items: center; justify-content: center;
+            gap: 0.5rem; padding: 1rem; text-align: center;
+            background: var(--soft); color: var(--muted); font-size: 0.78rem;
         }
+        .fallback .ic { font-size: 2.2rem; color: var(--muted); opacity: 0.55; }
+        .photo .fallback .ic { font-size: 4rem; color: var(--accent); opacity: 0.7; }
 
-        /* Radial glow spot to break flatness */
-        .radial-glow {
-            background: radial-gradient(circle 600px at 50% 200px, rgba(59, 130, 246, 0.05), transparent 80%);
+        /* ============ EDUCATION ============ */
+        .edu-card { border: 1px solid var(--line); border-radius: 12px; padding: clamp(1.25rem, 3vw, 1.75rem); display: grid; gap: 0.7rem; background: var(--bg); }
+        .edu-top { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.5rem 1rem; }
+        .edu-top h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.3; }
+        .edu-years .ic { margin-right: 0.35rem; }
+        .edu-years { font-size: 0.85rem; font-weight: 600; color: var(--accent); background: var(--accent-soft); padding: 0.2rem 0.7rem; border-radius: 999px; white-space: nowrap; }
+        .edu-uni { display: flex; align-items: center; gap: 0.55rem; font-weight: 500; }
+        .edu-uni .ic { color: var(--accent); font-size: 0.9rem; }
+        .edu-card p.text { color: var(--muted); max-width: 66ch; }
+
+        /* ============ CREDENTIALS ============ */
+        .arrows { display: flex; gap: 0.5rem; }
+        .arrow {
+            width: 40px; height: 40px; border-radius: 8px;
+            display: grid; place-items: center;
+            border: 1px solid var(--line); background: var(--bg); color: var(--text);
+            cursor: pointer;
         }
+        .arrow:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+        .arrow:disabled { opacity: 0.35; cursor: default; }
 
-        /* Glassmorphism utility card layer */
-        .glass-card {
-            background: rgba(31, 41, 55, 0.45);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            transition: background 0.4s ease, border-color 0.4s ease;
-        }
-
-        /* Custom Shimmer Effect */
-        @keyframes shimmer {
-            100% { transform: translateX(100%); }
-        }
-        .shimmer-trigger:hover::after {
-            position: absolute;
-            top: 0; right: 0; bottom: 0; left: 0;
-            transform: translateX(-100%);
-            background-image: linear-gradient(
-                90deg,
-                rgba(255, 255, 255, 0) 0%,
-                rgba(255, 255, 255, 0.03) 20%,
-                rgba(255, 255, 255, 0.06) 60%,
-                rgba(255, 255, 255, 0) 100%
-            );
-            animation: shimmer 1.2s infinite;
-            content: '';
-        }
-
-        /* ============ THEME TOGGLE BUTTON ============ */
-        .theme-toggle-btn {
-            width: 44px;
-            height: 44px;
-            border-radius: 9999px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(148, 163, 184, 0.08);
-            border: 1px solid rgba(148, 163, 184, 0.2);
-            color: #fbbf24;
-            transition: all 0.4s var(--premium-bezier);
-        }
-        .theme-toggle-btn:hover {
-            transform: rotate(20deg) scale(1.08);
-            border-color: var(--accent-blue);
-        }
-
-        /* ============ LIGHT MODE OVERRIDES ============
-           Tailwind utilities are used directly throughout the markup,
-           so light mode is achieved by re-mapping the slate palette
-           whenever html.light-mode is active. !important is required
-           to win over the utility classes' own specificity. */
-        html.light-mode .bg-slate-950 { background-color: #ffffff !important; }
-        html.light-mode .bg-slate-900,
-        html.light-mode .bg-slate-900\/20,
-        html.light-mode .bg-slate-900\/60 { background-color: #eef2f7 !important; }
-        html.light-mode .bg-slate-800,
-        html.light-mode .bg-slate-800\/40 { background-color: #e2e8f0 !important; }
-
-        html.light-mode .border-slate-800,
-        html.light-mode .border-slate-800\/50,
-        html.light-mode .border-slate-800\/60,
-        html.light-mode .border-slate-800\/80,
-        html.light-mode .border-slate-800\/40,
-        html.light-mode .border-slate-700 { border-color: #cbd5e1 !important; }
-        html.light-mode .border-slate-900 { border-color: #e2e8f0 !important; }
-        html.light-mode .hover\:border-slate-700:hover,
-        html.light-mode .hover\:border-slate-600:hover { border-color: #94a3b8 !important; }
-
-        html.light-mode .text-white { color: #0f172a !important; }
-        html.light-mode .text-slate-100,
-        html.light-mode .text-slate-200,
-        html.light-mode .text-slate-300 { color: #334155 !important; }
-        html.light-mode .text-slate-400 { color: #52606f !important; }
-        html.light-mode .text-slate-500 { color: #64748b !important; }
-        html.light-mode .text-slate-600 { color: #94a3b8 !important; }
-        html.light-mode .hover\:text-white:hover { color: #0f172a !important; }
-
-        html.light-mode .glass-card {
-            background: rgba(255, 255, 255, 0.65) !important;
-            border-color: rgba(15, 23, 42, 0.08) !important;
-        }
-        html.light-mode .grid-bg-overlay {
-            background-image: linear-gradient(to right, rgba(100, 116, 139, 0.10) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(100, 116, 139, 0.10) 1px, transparent 1px);
-        }
-        html.light-mode ::-webkit-scrollbar-thumb { background: #cbd5e1; }
-        html.light-mode .theme-toggle-btn { color: #4338ca; background: rgba(59,130,246,0.08); }
-
-        /* Keep the terminal window authentically dark in both themes */
-        html.light-mode .terminal-window.bg-slate-950 { background-color: #0b0f17 !important; }
-        html.light-mode .terminal-window .text-slate-300 { color: #cbd5e1 !important; }
-        html.light-mode .terminal-window .text-slate-400 { color: #94a3b8 !important; }
-        html.light-mode .terminal-window .text-slate-600 { color: #475569 !important; }
-        html.light-mode .terminal-window.border-slate-800 { border-color: #1e293b !important; }
-
-        /* ============ CAROUSEL ============ */
-        .carousel-track {
-            scroll-behavior: smooth;
+        .carousel {
+            display: flex; gap: 1rem;
+            overflow-x: auto;
             scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            padding-bottom: 0.5rem;
+            scrollbar-width: thin;
+            scrollbar-color: var(--line) transparent;
         }
-        .carousel-card {
-            scroll-snap-align: center;
+        .cert {
+            flex: 0 0 min(80vw, 290px);
+            scroll-snap-align: start;
+            display: flex; flex-direction: column;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--bg);
+            transition: border-color 0.2s ease;
         }
-        .carousel-card:hover img {
-            transform: scale(1.06);
+        .cert:hover { border-color: var(--accent); }
+        .cert-media { position: relative; aspect-ratio: 16 / 10; background: var(--soft); overflow: hidden; border-bottom: 1px solid var(--line); }
+        .cert-media img { width: 100%; height: 100%; object-fit: cover; }
+        .cert-body { display: flex; flex-direction: column; gap: 0.5rem; padding: 1rem 1.1rem 1.1rem; flex: 1; }
+        .cert-body h4 { font-size: 1rem; font-weight: 700; line-height: 1.35; }
+        .cert-body p { color: var(--muted); font-size: 0.88rem; line-height: 1.5; margin-bottom: 0.5rem; }
+        .cert-body .btn { margin-top: auto; }
+
+        .group-block { margin-top: clamp(2.5rem, 5vw, 3.5rem); }
+        .badges { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem; margin-top: 1.25rem; }
+        .badge-item { border: 1px solid var(--line); border-radius: 12px; padding: 1.25rem; display: grid; gap: 0.9rem; justify-items: start; align-content: start; background: var(--bg); transition: border-color 0.2s ease; }
+        .badge-item:hover { border-color: var(--accent); }
+        .badge-art { position: relative; width: 80px; height: 80px; border-radius: 12px; background: var(--soft); border: 1px solid var(--line); display: grid; place-items: center; overflow: hidden; }
+        .badge-art img { width: 100%; height: 100%; object-fit: contain; padding: 8px; }
+        .badge-art .fallback { background: transparent; }
+        .badge-art .fallback .ic { color: var(--accent); opacity: 1; font-size: 1.4rem; }
+        .badge-item h4 { font-size: 1rem; font-weight: 700; line-height: 1.3; }
+        .badge-item .issuer { color: var(--muted); font-size: 0.88rem; }
+        .text-link { font-weight: 600; font-size: 0.88rem; color: var(--accent); display: inline-flex; align-items: center; gap: 0.4rem; }
+        .text-link .ic { font-size: 0.7em; }
+        .text-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+        .credly { margin-top: 1.25rem; padding: 1rem 1.25rem; background: var(--soft); border-radius: 12px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.9rem; }
+        .credly p { color: var(--muted); }
+        .credly p .ic { color: var(--accent); margin-right: 0.5rem; }
+
+        /* ============ PROJECTS ============ */
+        .projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+        .project { border: 1px solid var(--line); border-radius: 12px; padding: clamp(1.25rem, 3vw, 1.75rem); display: flex; flex-direction: column; gap: 0.8rem; background: var(--bg); transition: border-color 0.2s ease; }
+        .project:hover { border-color: var(--accent); }
+        .project-head { display: flex; align-items: center; gap: 0.8rem; }
+        .skills li .ic { color: var(--accent); font-size: 0.8rem; }
+        .project h3 { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.01em; }
+        .project .kind { color: var(--accent); font-weight: 500; font-size: 0.92rem; margin-top: -0.4rem; }
+        .project .desc { color: var(--muted); }
+        .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+        .tags li { padding: 0.2rem 0.65rem; background: var(--soft); border: 1px solid var(--line); border-radius: 999px; font-size: 0.8rem; font-weight: 500; color: var(--muted); }
+        .project-links { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: auto; padding-top: 0.6rem; }
+
+        /* ============ CONTACT ============ */
+        .connect { padding: clamp(3.5rem, 7vw, 5rem) 0 2rem; border-top: 1px solid var(--line); background: var(--soft); }
+        .connect h2 { font-size: clamp(1.7rem, 4vw, 2.4rem); }
+        .connect .sub { max-width: 52ch; }
+        .mail-link { display: inline-block; margin-top: 1.4rem; font-size: clamp(1.05rem, 2.6vw, 1.35rem); font-weight: 600; color: var(--accent); word-break: break-word; }
+        .mail-link .ic { font-size: 0.8em; margin-right: 0.5rem; }
+        .mail-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+        .socials { display: flex; gap: 0.6rem; margin-top: 1.4rem; }
+        .social { width: 44px; height: 44px; border-radius: 8px; display: grid; place-items: center; border: 1px solid var(--line); background: var(--bg); font-size: 1.05rem; transition: border-color 0.2s ease, color 0.2s ease; }
+        .social:hover { border-color: var(--accent); color: var(--accent); }
+        .foot .ic { margin-right: 0.35rem; }
+        .foot { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.4rem 2rem; color: var(--muted); font-size: 0.85rem; }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 820px) {
+            .hero-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .photo { order: -1; width: 140px; }
+            .projects { grid-template-columns: 1fr; }
         }
-        .carousel-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 30;
-            width: 44px;
-            height: 44px;
-            border-radius: 9999px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(15, 23, 42, 0.7);
-            border: 1px solid rgba(148, 163, 184, 0.3);
-            color: #f8fafc;
-            backdrop-filter: blur(6px);
-            transition: all 0.3s var(--premium-bezier);
+        @media (max-width: 640px) {
+            body { -webkit-tap-highlight-color: transparent; }
+            section[id], footer[id] { scroll-margin-top: 104px; }
+            .section { padding: 3rem 0; }
+            .h-icon { width: 36px; height: 36px; }
+
+            /* Nav: brand and theme button on top, links as a second row */
+            .nav-inner { flex-wrap: wrap; height: auto; padding-top: 0.5rem; padding-bottom: 0.2rem; row-gap: 0; }
+            .nav-right { display: contents; }
+            .brand { order: 1; font-size: 1rem; }
+            .theme-btn { order: 2; }
+            .nav-links {
+                order: 3; flex: 0 0 100%;
+                gap: 1.1rem; font-size: 0.85rem; white-space: nowrap;
+                overflow-x: auto; scrollbar-width: none;
+                padding: 0.2rem 0 0.55rem;
+            }
+            .nav-links::-webkit-scrollbar { display: none; }
+            .nav-links a { padding: 0.3rem 0; }
+
+            /* Hero */
+            .hero { padding: 2rem 0 3rem; }
+            .photo { width: 112px; border-radius: 50%; }
+            .intro { margin-top: 0.9rem; }
+            .hero-actions .btn { flex: 1 1 calc(50% - 0.35rem); }
+
+            /* Buttons are easier to tap */
+            .btn { min-height: 44px; }
+            .btn-sm { min-height: 42px; }
+
+            /* Education: years first, then the degree */
+            .edu-top { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
+            .edu-years { order: -1; }
+
+            /* Certificates: swipe edge to edge, next card peeks in */
+            .arrows { display: none; }
+            .carousel {
+                margin: 0 calc(-1 * var(--gutter));
+                padding: 0 var(--gutter) 0.75rem;
+                scroll-padding-inline: var(--gutter);
+            }
+            .cert { flex-basis: 78vw; }
+
+            /* Badges: two per row */
+            .badges { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
+            .badge-item { padding: 1rem; gap: 0.7rem; }
+            .badge-art { width: 64px; height: 64px; }
+            .badge-item h4 { font-size: 0.92rem; }
+            .badge-item .issuer { font-size: 0.82rem; }
+            .credly { padding: 1rem; }
+            .credly .btn { width: 100%; }
+
+            /* Projects */
+            .project-links .btn { flex: 1 1 calc(50% - 0.3rem); }
+
+            /* Contact */
+            .connect { padding-bottom: calc(1.5rem + env(safe-area-inset-bottom)); }
+            .foot { flex-direction: column; gap: 0.3rem; }
         }
-        .carousel-arrow:hover {
-            background: var(--accent-blue);
-            border-color: var(--accent-blue);
-        }
-        html.light-mode .carousel-arrow {
-            background: rgba(255, 255, 255, 0.85);
-            color: #0f172a;
-            border-color: rgba(15, 23, 42, 0.1);
+        @media (prefers-reduced-motion: reduce) {
+            html, .carousel { scroll-behavior: auto; }
+            * { transition-duration: 0.01ms !important; }
         }
     </style>
 </head>
-<body class="antialiased relative select-none">
+<body>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="i-user" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol><symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></symbol><symbol id="i-cap" viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></symbol><symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></symbol><symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol><symbol id="i-code" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></symbol><symbol id="i-coffee" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></symbol><symbol id="i-layers" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></symbol><symbol id="i-box" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol><symbol id="i-calendar-check" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><polyline points="9 16 11 18 15 14"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol><symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol><symbol id="i-github" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></symbol><symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol><symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></symbol><symbol id="i-chevron-left" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></symbol><symbol id="i-chevron-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></symbol><symbol id="i-external" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol></svg>
 
-    <!-- Ambient Grid Background Elements -->
-    <div class="absolute inset-0 grid-bg-overlay pointer-events-none z-0"></div>
-    <div class="absolute top-0 left-0 right-0 h-[1000px] radial-glow pointer-events-none z-0"></div>
+    <!-- NAVIGATION -->
+    <header class="nav">
+        <nav class="wrap nav-inner" aria-label="Main">
+            <a href="#home" class="brand">Aradhya Dwivedi</a>
 
-    <!-- 1. STICKY EXECUTIVE NAVIGATION BAR -->
-    <header class="sticky top-0 w-full z-50 glass-card border-b border-slate-800/50 backdrop-blur-md">
-        <nav class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center font-bold text-white shadow-lg shadow-blue-500/20">
-                    AD
+            <div class="nav-right">
+                <div class="nav-links">
+                    <a href="#education">Education</a>
+                    <a href="#certifications">Credentials</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#connect">Contact</a>
                 </div>
-                <span class="font-semibold text-lg tracking-tight select-none">Aradhya<span class="text-blue-500 font-normal">.dev</span></span>
-            </div>
-
-            <div class="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide text-slate-300">
-                <a href="#home" class="hover:text-blue-500 premium-transition">Overview</a>
-                <a href="#education" class="hover:text-blue-500 premium-transition">Education</a>
-                <a href="#certifications" class="hover:text-blue-500 premium-transition">Credentials</a>
-                <a href="#projects" class="hover:text-blue-500 premium-transition">Works</a>
-            </div>
-
-            <div class="flex items-center gap-3">
-                <!-- Theme Toggle Button -->
-                <button id="theme-toggle" onclick="toggleTheme()" class="theme-toggle-btn" title="Switch theme" aria-label="Toggle light and dark theme">
-                    <i id="theme-icon" class="fas fa-sun text-base"></i>
+                <button id="theme-toggle" onclick="toggleTheme()" class="theme-btn" title="Switch theme" aria-label="Toggle light and dark theme">
+                    <svg class="ic icon-moon" aria-hidden="true"><use href="#i-moon"/></svg><svg class="ic icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
                 </button>
-
-                <a href="#connect" class="hidden sm:inline-block px-5 py-2.5 rounded-full bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 hover:border-slate-600 text-sm font-medium premium-transition shadow-sm">
-                    Contact Node
-                </a>
             </div>
         </nav>
     </header>
 
-    <main class="relative z-10 max-w-7xl mx-auto px-6 space-y-32 md:space-y-48 pt-12 pb-24">
+    <main>
 
-        <!-- 2. HIGH-END PREMIUM HERO SECTION -->
-        <section id="home" class="min-h-[70vh] flex flex-col justify-center items-center">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center w-full">
+        <!-- HERO -->
+        <section id="home" class="hero">
+            <div class="wrap hero-grid">
 
-                <!-- Left Details Framework -->
-                <div class="md:col-span-7 space-y-6 text-center md:text-left">
-                    <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-medium tracking-wider uppercase mx-auto md:mx-0">
-                        <span class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
-                        <span>Open to Collaborative Engagements</span>
-                    </div>
-
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight">
-                        Aradhya Dwivedi
-                    </h1>
-
-                    <p class="text-xl sm:text-2xl font-medium tracking-wide bg-gradient-to-r from-blue-400 via-indigo-400 to-slate-200 bg-clip-text text-transparent">
-                        Computer Science & Engineering Undergraduate
+                <div>
+                    <p class="status">Open to collaborations</p>
+                    <h1>Aradhya Dwivedi</h1>
+                    <p class="role">Computer Science &amp; Engineering undergraduate</p>
+                    <p class="intro">
+                        Second-year B.Tech student at Chhatrapati Shahu Ji Maharaj University (CSJMU), Kanpur. I focus on software engineering fundamentals, object-oriented programming and data structures.
                     </p>
 
-                    <div class="text-base text-slate-400 leading-relaxed max-w-2xl font-normal space-y-4">
-                        <p>
-                            Currently pursuing a <span class="text-white font-medium">B.Tech in CSE (2nd Year)</span> at <span class="text-white font-medium">Chhatrapati Shahu Ji Maharaj University (CSJMU)</span>. Focused on architectural software engineering logic, object-oriented paradigms, and data infrastructure models.
-                        </p>
-                    </div>
+                    <ul class="skills" aria-label="Core skills">
+                        <li><svg class="ic" aria-hidden="true"><use href="#i-code"/></svg>C</li>
+                        <li><svg class="ic" aria-hidden="true"><use href="#i-coffee"/></svg>Java</li>
+                        <li><svg class="ic" aria-hidden="true"><use href="#i-layers"/></svg>Data structures</li>
+                        <li><svg class="ic" aria-hidden="true"><use href="#i-box"/></svg>Object-oriented programming</li>
+                    </ul>
 
-                    <!-- Micro Terminal Object Showcase -->
-                    <div class="terminal-window w-full max-w-xl mx-auto md:mx-0 bg-slate-950 rounded-xl p-4 border border-slate-800 shadow-xl text-left mono text-xs text-slate-400 space-y-2">
-                        <div class="flex items-center space-x-2 pb-2 border-b border-slate-900">
-                            <span class="w-3 h-3 rounded-full bg-red-500/40"></span>
-                            <span class="w-3 h-3 rounded-full bg-yellow-500/40"></span>
-                            <span class="w-3 h-3 rounded-full bg-green-500/40"></span>
-                            <span class="text-slate-600 pl-2">system_diagnostics.sh</span>
-                        </div>
-                        <div><span class="text-blue-500">➜</span> <span class="text-indigo-400">~</span> current_status --academic</div>
-                        <div class="text-emerald-400 font-medium">>> Enrolled: B.Tech CSE [Year 2] @ CSJMU_Kanpur</div>
-                        <div><span class="text-blue-500">➜</span> <span class="text-indigo-400">~</span> core_competence --fetch</div>
-                        <div class="text-slate-300">>> ["C", "Java", "Data_Structures", "OOP_Methodologies"]</div>
-                    </div>
-
-                    <!-- Direct Connect Action Row -->
-                    <div class="flex flex-wrap justify-center md:justify-start gap-4 pt-4">
-                        <a href="#connect" class="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium text-sm hover:opacity-93 shadow-lg shadow-blue-500/10 premium-transition">
-                            Establish Connection
-                        </a>
-                        <a href="#certifications" class="px-6 py-3 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:bg-slate-800 font-medium text-sm premium-transition">
-                            Review Credentials
-                        </a>
+                    <div class="hero-actions">
+                        <a href="#connect" class="btn btn-solid"><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg> Get in touch</a>
+                        <a href="#certifications" class="btn btn-line"><svg class="ic" aria-hidden="true"><use href="#i-award"/></svg> See credentials</a>
                     </div>
                 </div>
 
-                <!-- Right Photo Container Frame Asset (profile.png) -->
-                <div class="md:col-span-5 flex justify-center items-center">
-                    <div class="relative group w-72 h-72 sm:w-80 sm:h-80 md:w-full md:max-w-[340px] aspect-square">
-                        <div class="absolute -inset-2 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl blur-xl opacity-20 group-hover:opacity-30 premium-transition"></div>
+                <!-- Profile image (profile.jpg) -->
+                <div class="photo">
+                    <img src="profile.jpg" alt="Aradhya Dwivedi Profile" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback" role="img" aria-label="Aradhya Dwivedi">
+                        <svg class="ic" aria-hidden="true"><use href="#i-user"/></svg>
+                    </div>
+                </div>
 
-                        <div class="w-full h-full rounded-2xl bg-slate-900 border border-slate-800 overflow-hidden relative z-10 p-3">
-                            <div class="w-full h-full rounded-xl overflow-hidden bg-slate-950 relative">
-                                <img src="profile.jpg" alt="Aradhya Dwivedi Profile" class="w-full h-full object-cover group-hover:scale-102 premium-transition opacity-90 group-hover:opacity-100" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            </div>
+        </section>
 
-                                <div class="absolute inset-0 bg-slate-950 hidden flex-col items-center justify-center space-y-3 p-6 text-center">
-                                    <div class="w-16 h-16 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center text-xl font-bold text-blue-500">
-                                        AD
-                                    </div>
-                                    <span class="text-xs text-slate-500 font-medium">Profile Image Placeholder<br>(profile.png)</span>
-                                </div>
+
+        <!-- EDUCATION -->
+        <section id="education" class="section">
+            <div class="wrap">
+                <div class="section-head">
+                    <h2><span class="h-icon"><svg class="ic" aria-hidden="true"><use href="#i-cap"/></svg></span>Education</h2>
+                </div>
+
+                <div class="edu-card">
+                    <div class="edu-top">
+                        <h3>Bachelor of Technology (B.Tech), Computer Science &amp; Engineering</h3>
+                        <span class="edu-years"><svg class="ic" aria-hidden="true"><use href="#i-calendar"/></svg>2025 – Present</span>
+                    </div>
+                    <p class="edu-uni"><svg class="ic" aria-hidden="true"><use href="#i-book"/></svg><span>Chhatrapati Shahu Ji Maharaj University (CSJMU), Kanpur</span></p>
+                    <p class="text">Currently in the second year. Core subjects so far include object-oriented programming in Java, data structures, discrete mathematics and algorithm complexity.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- CREDENTIALS -->
+        <section id="certifications" class="section">
+            <div class="wrap">
+
+                <div class="section-head">
+                    <div>
+                        <h2><span class="h-icon"><svg class="ic" aria-hidden="true"><use href="#i-award"/></svg></span>Credentials</h2>
+                        <p class="sub">Every certificate and badge links to its own verification page.</p>
+                    </div>
+                </div>
+
+                <!-- Certificates carousel -->
+                <div class="section-head" style="margin-bottom:1.1rem;">
+                    <h3 class="group"><svg class="ic" aria-hidden="true"><use href="#i-file"/></svg>Certificates</h3>
+                    <div class="arrows">
+                        <button id="cert-prev" onclick="scrollCarousel('cert-carousel', -1)" class="arrow" aria-label="Scroll certificates left">
+                            <svg class="ic" aria-hidden="true"><use href="#i-chevron-left"/></svg>
+                        </button>
+                        <button id="cert-next" onclick="scrollCarousel('cert-carousel', 1)" class="arrow" aria-label="Scroll certificates right">
+                            <svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="cert-carousel" class="carousel" tabindex="0" aria-label="Certificates">
+
+                    <!-- Certificate 1 -->
+                    <article class="cert">
+                        <div class="cert-media">
+                            <img src="cert1.png" alt="Microsoft Certificate" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="fallback"><svg class="ic" aria-hidden="true"><use href="#i-award"/></svg></div>
+                        </div>
+                        <div class="cert-body">
+                            <h4>Build a computer vision app with Azure Cognitive Services</h4>
+                            <p>An online project authorized by Microsoft and offered through Coursera.</p>
+                            <a href="https://www.coursera.org/account/accomplishments/verify/E72PKAIINUA9" target="_blank" rel="noopener noreferrer" class="btn btn-line btn-sm">Verify certificate <svg class="ic" aria-hidden="true"><use href="#i-external"/></svg></a>
+                        </div>
+                    </article>
+
+                    <!-- Certificate 2 -->
+                    <article class="cert">
+                        <div class="cert-media">
+                            <img src="cert2.png" alt="Microsoft Certificate" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="fallback"><svg class="ic" aria-hidden="true"><use href="#i-award"/></svg></div>
+                        </div>
+                        <div class="cert-body">
+                            <h4>Introduction to Prompt Engineering with GitHub Copilot</h4>
+                            <p>An online project authorized by Microsoft and offered through Simplilearn.</p>
+                            <a href="https://simpli-web.app.link/e/OoeOILgdq4b" target="_blank" rel="noopener noreferrer" class="btn btn-line btn-sm">Verify certificate <svg class="ic" aria-hidden="true"><use href="#i-external"/></svg></a>
+                        </div>
+                    </article>
+
+                    <!-- Certificate 3 -->
+                    <article class="cert">
+                        <div class="cert-media">
+                            <img src="cert3.png" alt="Cisco Certificate" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="fallback"><svg class="ic" aria-hidden="true"><use href="#i-award"/></svg></div>
+                        </div>
+                        <div class="cert-body">
+                            <h4>Python Essentials 1</h4>
+                            <p>Offered by Networking Academy through the Cisco Networking Academy program.</p>
+                            <a href="https://www.netacad.com/certificates/?issuanceId=b1f2deef-ac58-4241-b07e-e9266aa16ecf" target="_blank" rel="noopener noreferrer" class="btn btn-line btn-sm">Verify certificate <svg class="ic" aria-hidden="true"><use href="#i-external"/></svg></a>
+                        </div>
+                    </article>
+
+                    <!-- Certificate 4 -->
+                    <article class="cert">
+                        <div class="cert-media">
+                            <img src="cert4.png" alt="Cisco Certificate" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="fallback"><svg class="ic" aria-hidden="true"><use href="#i-award"/></svg></div>
+                        </div>
+                        <div class="cert-body">
+                            <h4>Introduction to Cybersecurity</h4>
+                            <p>Offered by Networking Academy through the Cisco Networking Academy program.</p>
+                            <a href="https://www.netacad.com/certificates/?issuanceId=b1f2deef-ac58-4241-b07e-e9266aa16ecf" target="_blank" rel="noopener noreferrer" class="btn btn-line btn-sm">Verify certificate <svg class="ic" aria-hidden="true"><use href="#i-external"/></svg></a>
+                        </div>
+                    </article>
+
+                    <!-- Certificate 5 -->
+                    <article class="cert">
+                        <div class="cert-media">
+                            <img src="cert5.png" alt="Google Certificate" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="fallback"><svg class="ic" aria-hidden="true"><use href="#i-award"/></svg></div>
+                        </div>
+                        <div class="cert-body">
+                            <h4>Google Analytics Certification 2026</h4>
+                            <p>Offered by SkillShop, the Google program.</p>
+                            <a href="https://skillshop.credential.net/96a048c8-a885-4d87-be35-c230e13449fa#acc.lKRvku9w" target="_blank" rel="noopener noreferrer" class="btn btn-line btn-sm">Verify certificate <svg class="ic" aria-hidden="true"><use href="#i-external"/></svg></a>
+                        </div>
+                    </article>
+
+                    <!-- Certificate 6 -->
+                    <article class="cert">
+                        <div class="cert-media">
+                            <img src="cert6.png" alt="Deloitte Certificate" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="fallback"><svg class="ic" aria-hidden="true"><use href="#i-award"/></svg></div>
+                        </div>
+                        <div class="cert-body">
+                            <h4>Data Analytics Job Simulation Certification</h4>
+                            <p>Offered by Deloitte.</p>
+                            <a href="https://www.theforage.com/completion-certificates/9PBTqmSxAf6zZTseP/io9DzWKe3PTsiS6GG_9PBTqmSxAf6zZTseP_6a41547dd61e187bf6b166b3_1782673805889_completion_certificate.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-line btn-sm">Verify certificate <svg class="ic" aria-hidden="true"><use href="#i-external"/></svg></a>
+                        </div>
+                    </article>
+
+                    <!-- Certificate 7 -->
+                    <article class="cert">
+                        <div class="cert-media">
+                            <img src="cert7.png" alt="Deloitte Certificate" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="fallback"><svg class="ic" aria-hidden="true"><use href="#i-award"/></svg></div>
+                        </div>
+                        <div class="cert-body">
+                            <h4>Cyber Job Simulation Certification</h4>
+                            <p>Offered by Deloitte.</p>
+                            <a href="https://www.theforage.com/completion-certificates/9PBTqmSxAf6zZTseP/E9pA6qsdbeyEkp3ti_9PBTqmSxAf6zZTseP_6a41547dd61e187bf6b166b3_1783116157636_completion_certificate.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-line btn-sm">Verify certificate <svg class="ic" aria-hidden="true"><use href="#i-external"/></svg></a>
+                        </div>
+                    </article>
+
+                    <!-- Certificate 8 -->
+                    <article class="cert">
+                        <div class="cert-media">
+                            <img src="cert8.png" alt="Google Cloud Certificate" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="fallback"><svg class="ic" aria-hidden="true"><use href="#i-award"/></svg></div>
+                        </div>
+                        <div class="cert-body">
+                            <h4>Exploring Data Transformation with Google Cloud</h4>
+                            <p>An online project authorized by Google Cloud and offered through Simplilearn.</p>
+                            <a href="https://simpli-web.app.link/e/LW0MvCa8B4b" target="_blank" rel="noopener noreferrer" class="btn btn-line btn-sm">Verify certificate <svg class="ic" aria-hidden="true"><use href="#i-external"/></svg></a>
+                        </div>
+                    </article>
+
+                </div>
+
+                <!-- Digital badges -->
+                <div class="group-block">
+                    <h3 class="group"><svg class="ic" aria-hidden="true"><use href="#i-star"/></svg>Digital badges</h3>
+                    <p class="sub">Verified through Credly and Skillshop.</p>
+
+                    <div class="badges">
+
+                        <!-- Badge 1 -->
+                        <div class="badge-item">
+                            <div class="badge-art">
+                                <img src="badge1.png" alt="Badge 1" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="fallback"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg></div>
                             </div>
-                        </div>
-
-                        <div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-blue-500/60 z-20 pointer-events-none rounded-tl-md"></div>
-                        <div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-indigo-500/60 z-20 pointer-events-none rounded-br-md"></div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-
-        <!-- 3. DETAILED STATS ROW -->
-        <section class="w-full">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 p-8 rounded-2xl border border-slate-800/60 bg-slate-900/20 backdrop-blur-sm">
-                <div class="text-center space-y-1">
-                    <div class="text-3xl font-bold tracking-tight text-white font-semibold">2<span class="text-blue-500 text-2xl font-normal">nd</span></div>
-                    <div class="text-xs font-medium tracking-wide uppercase text-slate-500">Year Academic Standing</div>
-                </div>
-                <div class="text-center space-y-1 border-l border-slate-800">
-                    <div class="text-3xl font-bold tracking-tight text-white font-semibold">2<span class="text-indigo-500 text-2xl font-normal">+</span></div>
-                    <div class="text-xs font-medium tracking-wide uppercase text-slate-500">Academic Programs Run</div>
-                </div>
-                <div class="text-center space-y-1 border-l border-slate-800">
-                    <div class="text-3xl font-bold tracking-tight text-white font-semibold">100<span class="text-blue-500 text-2xl font-normal">%</span></div>
-                    <div class="text-xs font-medium tracking-wide uppercase text-slate-500">Verified Credentials</div>
-                </div>
-                <div class="text-center space-y-1 border-l border-slate-800">
-                    <div class="text-3xl font-bold tracking-tight text-white font-semibold">2<span class="text-indigo-500 text-2xl font-normal">+</span></div>
-                    <div class="text-xs font-medium tracking-wide uppercase text-slate-500">Core Projects Handled</div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- 4. ACADEMIC JOURNEY SECTION (MINIMALIST TIMELINE) -->
-        <section id="education" class="space-y-12">
-            <div class="space-y-4 max-w-xl">
-                <div class="text-xs font-semibold tracking-widest text-blue-500 uppercase">Qualification Matrix</div>
-                <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Academic Timeline</h2>
-                <p class="text-sm text-slate-400">Formal educational tracking mapped chronologically across Chhatrapati Shahu Ji Maharaj University instances.</p>
-            </div>
-
-            <div class="relative border-l border-slate-800 max-w-4xl ml-4 md:ml-6 pl-8 md:pl-10 space-y-12 py-2">
-
-                <!-- Timeline Event 1: Present Core Enrolment -->
-                <div class="relative group">
-                    <div class="absolute -left-[41px] md:-left-[49px] top-1.5 w-6 h-6 rounded-full bg-slate-950 border-2 border-blue-500 flex items-center justify-center z-20 group-hover:border-blue-400 premium-transition">
-                        <div class="w-2 h-2 rounded-full bg-blue-500 animate-ping"></div>
-                    </div>
-
-                    <div class="glass-card rounded-2xl p-6 border border-slate-800/80 group-hover:border-slate-700/80 hover:shadow-xl hover:shadow-blue-500/[0.01] premium-transition relative overflow-hidden shimmer-trigger">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-slate-800/60">
                             <div>
-                                <h3 class="text-lg font-bold text-white group-hover:text-blue-400 premium-transition">
-                                    Bachelor of Technology (B.Tech)
-                                </h3>
-                                <p class="text-sm font-medium text-slate-300 pt-0.5">Computer Science & Engineering</p>
+                                <h4>Python Essentials 1</h4>
+                                <p class="issuer">Cisco</p>
                             </div>
-                            <div class="inline-flex px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-semibold uppercase tracking-wider self-start sm:self-center">
-                                2025 - Present
-                            </div>
+                            <a href="https://www.credly.com/badges/1c049ab1-709b-4dee-ac0a-95913fe76295/public_url" target="_blank" rel="noopener noreferrer" class="text-link">Verify badge <svg class="ic" aria-hidden="true"><use href="#i-external"/></svg></a>
                         </div>
 
-                        <div class="pt-4 space-y-3 text-sm text-slate-400 font-normal">
-                            <p class="flex items-center space-x-2 text-slate-300 font-medium">
-                                <i class="fas fa-university text-blue-500 text-xs"></i>
-                                <span>Chhatrapati Shahu Ji Maharaj University (CSJMU), Kanpur</span>
-                            </p>
-                            <p class="leading-relaxed">
-                                Currently focusing on professional engineering streams. Core operational subjects include Object-Oriented Programming models via Java, custom data structures setups, discrete computing mathematics, and algorithmic complexity parameters.
-                            </p>
-                            <div class="pt-2 flex flex-wrap gap-2">
-                                <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800/80 text-xs text-slate-400 tracking-wide">2nd Year Standee</span>
-                                <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800/80 text-xs text-slate-400 tracking-wide">CSE Domain Core</span>
+                        <!-- Badge 2 -->
+                        <div class="badge-item">
+                            <div class="badge-art">
+                                <img src="badge2.png" alt="Badge 2" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="fallback"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg></div>
                             </div>
+                            <div>
+                                <h4>AI Skills Fest 2026</h4>
+                                <p class="issuer">Microsoft</p>
+                            </div>
+                            <a href="https://www.credly.com/badges/38c6d040-12f8-4106-a671-e11b2f6156f8/public_url" target="_blank" rel="noopener noreferrer" class="text-link">Verify badge <svg class="ic" aria-hidden="true"><use href="#i-external"/></svg></a>
                         </div>
+
+                        <!-- Badge 3 -->
+                        <div class="badge-item">
+                            <div class="badge-art">
+                                <img src="badge3.png" alt="Badge 3" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="fallback"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg></div>
+                            </div>
+                            <div>
+                                <h4>Introduction to Cybersecurity</h4>
+                                <p class="issuer">Cisco</p>
+                            </div>
+                            <a href="https://www.credly.com/badges/a59c267c-8370-479f-a0c0-fcaf9778f11c/public_url" target="_blank" rel="noopener noreferrer" class="text-link">Verify badge <svg class="ic" aria-hidden="true"><use href="#i-external"/></svg></a>
+                        </div>
+
+                        <!-- Badge 4 -->
+                        <div class="badge-item">
+                            <div class="badge-art">
+                                <img src="badge4.png" alt="Badge 4" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="fallback"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg></div>
+                            </div>
+                            <div>
+                                <h4>Google Analytics</h4>
+                                <p class="issuer">Skillshop (Google)</p>
+                            </div>
+                            <a href="https://skillshop.credential.net/96a048c8-a885-4d87-be35-c230e13449fa#acc.lKRvku9w" target="_blank" rel="noopener noreferrer" class="text-link">Verify badge <svg class="ic" aria-hidden="true"><use href="#i-external"/></svg></a>
+                        </div>
+
+                    </div>
+
+                    <div class="credly">
+                        <p><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg>See every badge in one place on the full Credly profile.</p>
+                        <a href="https://www.credly.com/users/aradhya-dwivedi" target="_blank" rel="noopener noreferrer" class="btn btn-line btn-sm">Open Credly profile <svg class="ic" aria-hidden="true"><use href="#i-external"/></svg></a>
                     </div>
                 </div>
 
@@ -417,457 +582,114 @@
         </section>
 
 
-        <!-- 5. REFRESHED DYNAMIC CERTIFICATIONS SHEET -->
-        <section id="certifications" class="space-y-12">
-            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
-                <div class="space-y-4 max-w-xl">
-                    <div class="text-xs font-semibold tracking-widest text-blue-500 uppercase">Credential Modules</div>
-                    <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Certifications & Badges</h2>
-                    <p class="text-sm text-slate-400">Swipe through official credentials — each card carries direct, independent verification routing.</p>
-                </div>
-                <div class="text-xs text-slate-500 font-medium mono whitespace-nowrap bg-slate-900/60 px-3 py-1.5 rounded-lg border border-slate-800/40">
-                    Smart Fallback System: <span class="text-emerald-400">ACTIVE</span>
-                </div>
-            </div>
-
-            <!-- SUB-SECTION A: PLATFORM CERTIFICATES — AMAZON-STYLE IMAGE CAROUSEL -->
-            <div class="space-y-8">
-                <h3 class="text-xs font-semibold tracking-wider uppercase text-slate-400 flex items-center space-x-2">
-                    <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
-                    <span>Certifications</span>
-                </h3>
-
-                <!-- Carousel Wrapper -->
-                <div class="relative">
-                    <button onclick="scrollCarousel('cert-carousel', -1)" class="carousel-arrow -left-2 md:-left-5" aria-label="Scroll certificates left">
-                        <i class="fas fa-chevron-left text-sm"></i>
-                    </button>
-
-                    <div id="cert-carousel" class="carousel-track flex gap-6 overflow-x-auto no-scrollbar pb-4 px-1 scroll-px-1">
-
-                        <!-- Certificate Card 1 -->
-                        <div class="carousel-card group glass-card shrink-0 w-72 sm:w-80 rounded-2xl border border-slate-800/80 hover:border-slate-700/80 premium-transition overflow-hidden">
-                            <div class="w-full h-48 bg-slate-950 overflow-hidden relative">
-                                <!-- Apni certificate image ka path yahan lagayein (e.g., cert1.png) -->
-                                <img src="cert1.png" alt="Microsoft Certificate" class="w-full h-full object-cover premium-transition" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <div class="absolute inset-0 bg-gradient-to-br from-slate-900 to-slate-950 hidden flex-col items-center justify-center text-center p-4">
-                                    <i class="fas fa-file-certificate text-slate-700 text-3xl mb-1"></i>
-                                    <span class="text-[10px] text-slate-500 font-medium">Certificate Image Link<br>(cert1.png)</span>
-                                </div>
-                            </div>
-                            <div class="p-5 space-y-3">
-                                <h4 class="text-base font-bold text-white group-hover:text-blue-400 premium-transition leading-snug">Build a computer vision app with Azure Cognitive Services</h4>
-                                <p class="text-xs text-slate-400 leading-relaxed">An online project authorized by Microsoft and offered through Coursera.</p>
-                                <!-- Apni verification link yahan add karein -->
-                                <a href="https://www.coursera.org/account/accomplishments/verify/E72PKAIINUA9" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-slate-900 hover:bg-blue-600 border border-slate-800 hover:border-blue-500 text-slate-300 hover:text-white font-medium text-xs tracking-wider uppercase premium-transition w-full justify-center">
-                                    <span>Verify Certificate</span>
-                                    <i class="fas fa-arrow-up-right-from-square text-[9px]"></i>
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- Certificate Card 2 -->
-                        <div class="carousel-card group glass-card shrink-0 w-72 sm:w-80 rounded-2xl border border-slate-800/80 hover:border-slate-700/80 premium-transition overflow-hidden">
-                            <div class="w-full h-48 bg-slate-950 overflow-hidden relative">
-                                <img src="cert2.png" alt="Microsoft Certificate" class="w-full h-full object-cover premium-transition" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <div class="absolute inset-0 bg-gradient-to-br from-slate-900 to-slate-950 hidden flex-col items-center justify-center text-center p-4">
-                                    <i class="fas fa-file-certificate text-slate-700 text-3xl mb-1"></i>
-                                    <span class="text-[10px] text-slate-500 font-medium">Certificate Image Link<br>(cert2.png)</span>
-                                </div>
-                            </div>
-                            <div class="p-5 space-y-3">
-                                <h4 class="text-base font-bold text-white group-hover:text-indigo-400 premium-transition leading-snug">Introduction to Prompt Engineering with GitHub Copilot</h4>
-                                <p class="text-xs text-slate-400 leading-relaxed">An online project authorized by Microsoft and offered through Simplilearn.</p>
-                                <a href="https://simpli-web.app.link/e/OoeOILgdq4b" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-slate-900 hover:bg-indigo-600 border border-slate-800 hover:border-indigo-500 text-slate-300 hover:text-white font-medium text-xs tracking-wider uppercase premium-transition w-full justify-center">
-                                    <span>Verify Certificate</span>
-                                    <i class="fas fa-arrow-up-right-from-square text-[9px]"></i>
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- Certificate Card 3 -->
-                        <div class="carousel-card group glass-card shrink-0 w-72 sm:w-80 rounded-2xl border border-slate-800/80 hover:border-slate-700/80 premium-transition overflow-hidden">
-                            <div class="w-full h-48 bg-slate-950 overflow-hidden relative">
-                                <img src="cert3.png" alt="Cisco Certificate" class="w-full h-full object-cover premium-transition" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <div class="absolute inset-0 bg-gradient-to-br from-slate-900 to-slate-950 hidden flex-col items-center justify-center text-center p-4">
-                                    <i class="fas fa-file-certificate text-slate-700 text-3xl mb-1"></i>
-                                    <span class="text-[10px] text-slate-500 font-medium">Certificate Image Link<br>(cert3.png)</span>
-                                </div>
-                            </div>
-                            <div class="p-5 space-y-3">
-                                <h4 class="text-base font-bold text-white group-hover:text-blue-400 premium-transition leading-snug">Python Essentials 1</h4><br>
-                                <p class="text-xs text-slate-400 leading-relaxed">Offered by Networking Academy through the Cisco Networking Academy program.</p>
-                                <a href="https://www.netacad.com/certificates/?issuanceId=b1f2deef-ac58-4241-b07e-e9266aa16ecf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-slate-900 hover:bg-blue-600 border border-slate-800 hover:border-blue-500 text-slate-300 hover:text-white font-medium text-xs tracking-wider uppercase premium-transition w-full justify-center">
-                                    <span>Verify Certificate</span>
-                                    <i class="fas fa-arrow-up-right-from-square text-[9px]"></i>
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- Certificate Card 4 -->
-                        <div class="carousel-card group glass-card shrink-0 w-72 sm:w-80 rounded-2xl border border-slate-800/80 hover:border-slate-700/80 premium-transition overflow-hidden">
-                            <div class="w-full h-48 bg-slate-950 overflow-hidden relative">
-                                <img src="cert4.png" alt="Cisco Certificate" class="w-full h-full object-cover premium-transition" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <div class="absolute inset-0 bg-gradient-to-br from-slate-900 to-slate-950 hidden flex-col items-center justify-center text-center p-4">
-                                    <i class="fas fa-file-certificate text-slate-700 text-3xl mb-1"></i>
-                                    <span class="text-[10px] text-slate-500 font-medium">Certificate Image Link<br>(cert4.png)</span>
-                                </div>
-                            </div>
-                            <div class="p-5 space-y-3">
-                                <h4 class="text-base font-bold text-white group-hover:text-blue-400 premium-transition leading-snug">Introduction to Cybersecurity</h4><br>
-                                <p class="text-xs text-slate-400 leading-relaxed">Offered by Networking Academy through the Cisco Networking Academy program.</p>
-                                <a href="https://www.netacad.com/certificates/?issuanceId=b1f2deef-ac58-4241-b07e-e9266aa16ecf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-slate-900 hover:bg-blue-600 border border-slate-800 hover:border-blue-500 text-slate-300 hover:text-white font-medium text-xs tracking-wider uppercase premium-transition w-full justify-center">
-                                    <span>Verify Certificate</span>
-                                    <i class="fas fa-arrow-up-right-from-square text-[9px]"></i>
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- Certificate Card 5 -->
-                        <div class="carousel-card group glass-card shrink-0 w-72 sm:w-80 rounded-2xl border border-slate-800/80 hover:border-slate-700/80 premium-transition overflow-hidden">
-                            <div class="w-full h-48 bg-slate-950 overflow-hidden relative">
-                                <img src="cert5.png" alt="Google Certificate" class="w-full h-full object-cover premium-transition" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <div class="absolute inset-0 bg-gradient-to-br from-slate-900 to-slate-950 hidden flex-col items-center justify-center text-center p-4">
-                                    <i class="fas fa-file-certificate text-slate-700 text-3xl mb-1"></i>
-                                    <span class="text-[10px] text-slate-500 font-medium">Certificate Image Link<br>(cert5.png)</span>
-                                </div>
-                            </div>
-                            <div class="p-5 space-y-3">
-                                <h4 class="text-base font-bold text-white group-hover:text-blue-400 premium-transition leading-snug">Google Analytics Certification 2026</h4>
-                                <p class="text-xs text-slate-400 leading-relaxed">Offered by SkillShop the Google program.</p><br>
-                                <a href="https://skillshop.credential.net/96a048c8-a885-4d87-be35-c230e13449fa#acc.lKRvku9w" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-slate-900 hover:bg-blue-600 border border-slate-800 hover:border-blue-500 text-slate-300 hover:text-white font-medium text-xs tracking-wider uppercase premium-transition w-full justify-center">
-                                    <span>Verify Certificate</span>
-                                    <i class="fas fa-arrow-up-right-from-square text-[9px]"></i>
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- Certificate Card 6-->
-                        <div class="carousel-card group glass-card shrink-0 w-72 sm:w-80 rounded-2xl border border-slate-800/80 hover:border-slate-700/80 premium-transition overflow-hidden">
-                            <div class="w-full h-48 bg-slate-950 overflow-hidden relative">
-                                <img src="cert6.png" alt="Deloitte Certificate" class="w-full h-full object-cover premium-transition" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <div class="absolute inset-0 bg-gradient-to-br from-slate-900 to-slate-950 hidden flex-col items-center justify-center text-center p-4">
-                                    <i class="fas fa-file-certificate text-slate-700 text-3xl mb-1"></i>
-                                    <span class="text-[10px] text-slate-500 font-medium">Certificate Image Link<br>(cert6.png)</span>
-                                </div>
-                            </div>
-                            <div class="p-5 space-y-3">
-                                <h4 class="text-base font-bold text-white group-hover:text-blue-400 premium-transition leading-snug">Data Analytics Job Simulaton Certification</h4>
-                                <p class="text-xs text-slate-400 leading-relaxed">Offered by Deloitte.</p><br>
-                                <a href="https://www.theforage.com/completion-certificates/9PBTqmSxAf6zZTseP/io9DzWKe3PTsiS6GG_9PBTqmSxAf6zZTseP_6a41547dd61e187bf6b166b3_1782673805889_completion_certificate.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-slate-900 hover:bg-blue-600 border border-slate-800 hover:border-blue-500 text-slate-300 hover:text-white font-medium text-xs tracking-wider uppercase premium-transition w-full justify-center">
-                                    <span>Verify Certificate</span>
-                                    <i class="fas fa-arrow-up-right-from-square text-[9px]"></i>
-                                </a>
-                            </div>
-                        </div>
-
-                         <!-- Certificate Card 7-->
-                        <div class="carousel-card group glass-card shrink-0 w-72 sm:w-80 rounded-2xl border border-slate-800/80 hover:border-slate-700/80 premium-transition overflow-hidden">
-                            <div class="w-full h-48 bg-slate-950 overflow-hidden relative">
-                                <img src="cert7.png" alt="Deloitte Certificate" class="w-full h-full object-cover premium-transition" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <div class="absolute inset-0 bg-gradient-to-br from-slate-900 to-slate-950 hidden flex-col items-center justify-center text-center p-4">
-                                    <i class="fas fa-file-certificate text-slate-700 text-3xl mb-1"></i>
-                                    <span class="text-[10px] text-slate-500 font-medium">Certificate Image Link<br>(cert7.png)</span>
-                                </div>
-                            </div>
-                            <div class="p-5 space-y-3">
-                                <h4 class="text-base font-bold text-white group-hover:text-blue-400 premium-transition leading-snug">Cyber Job Simulation Certification</h4><br>
-                                <p class="text-xs text-slate-400 leading-relaxed">Offered by Deloitte.</p><br>
-                                <a href="https://www.theforage.com/completion-certificates/9PBTqmSxAf6zZTseP/E9pA6qsdbeyEkp3ti_9PBTqmSxAf6zZTseP_6a41547dd61e187bf6b166b3_1783116157636_completion_certificate.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-slate-900 hover:bg-blue-600 border border-slate-800 hover:border-blue-500 text-slate-300 hover:text-white font-medium text-xs tracking-wider uppercase premium-transition w-full justify-center">
-                                    <span>Verify Certificate</span>
-                                    <i class="fas fa-arrow-up-right-from-square text-[9px]"></i>
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- Certificate Card 8 -->
-                        <div class="carousel-card group glass-card shrink-0 w-72 sm:w-80 rounded-2xl border border-slate-800/80 hover:border-slate-700/80 premium-transition overflow-hidden">
-                            <div class="w-full h-48 bg-slate-950 overflow-hidden relative">
-                                <img src="cert8.png" alt="Google Cloud Certificate" class="w-full h-full object-cover premium-transition" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <div class="absolute inset-0 bg-gradient-to-br from-slate-900 to-slate-950 hidden flex-col items-center justify-center text-center p-4">
-                                    <i class="fas fa-file-certificate text-slate-700 text-3xl mb-1"></i>
-                                    <span class="text-[10px] text-slate-500 font-medium">Certificate Image Link<br>(cert8.png)</span>
-                                </div>
-                            </div>
-                            <div class="p-5 space-y-3">
-                                <h4 class="text-base font-bold text-white group-hover:text-indigo-400 premium-transition leading-snug">Exploring Data Transformation with Google Cloud</h4>
-                                <p class="text-xs text-slate-400 leading-relaxed">An online project authorized by Google Cloud and offered through Simplilearn.</p>
-                                <a href="https://simpli-web.app.link/e/LW0MvCa8B4b" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-slate-900 hover:bg-indigo-600 border border-slate-800 hover:border-indigo-500 text-slate-300 hover:text-white font-medium text-xs tracking-wider uppercase premium-transition w-full justify-center">
-                                    <span>Verify Certificate</span>
-                                    <i class="fas fa-arrow-up-right-from-square text-[9px]"></i>
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- Add more certificate cards here by duplicating the block above -->
-
-                    </div>
-
-                    <button onclick="scrollCarousel('cert-carousel', 1)" class="carousel-arrow -right-2 md:-right-5" aria-label="Scroll certificates right">
-                        <i class="fas fa-chevron-right text-sm"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- SUB-SECTION B: CREDLY BADGES — SHOWN WITH IMAGES IN-PAGE -->
-            <div class="space-y-6 pt-6">
-                <h3 class="text-xs font-semibold tracking-wider uppercase text-slate-400 flex items-center space-x-2">
-                    <span class="w-2 h-2 rounded-full bg-blue-500"></span>
-                    <span>Global Digital Badges (Credly Verified)</span>
-                </h3>
-
-                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-
-                    <!-- Badge Card 1 -->
-                    <div class="group glass-card rounded-2xl p-5 border border-slate-800/80 hover:border-slate-700/80 premium-transition flex flex-col items-center text-center space-y-3">
-                        <div class="w-24 h-24 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-center overflow-hidden relative">
-                            <!-- Apni badge image ka path yahan lagayein (e.g., badge1.png) -->
-                            <img src="badge1.png" alt="Badge 1" class="w-full h-full object-contain p-2 group-hover:scale-105 premium-transition" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="absolute inset-0 hidden flex-col items-center justify-center text-blue-500">
-                                <i class="fas fa-shield-alt text-2xl"></i>
-                            </div>
-                        </div>
-                        <div class="space-y-1">
-                            <h5 class="text-sm font-bold text-white">Python Essentials 1</h5>
-                            <p class="text-[11px] text-slate-500 mono uppercase tracking-wide">Cisco</p>
-                        </div>
-                        <!-- Apni Credly badge verification link yahan add karein -->
-                        <a href="https://www.credly.com/badges/1c049ab1-709b-4dee-ac0a-95913fe76295/public_url" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center space-x-1.5 px-3 py-2 rounded-lg bg-slate-900 hover:bg-blue-600 border border-slate-800 hover:border-blue-500 text-slate-300 hover:text-white font-medium text-[10px] tracking-wider uppercase premium-transition">
-                            <span>Verify</span>
-                            <i class="fas fa-arrow-up-right-from-square text-[8px]"></i>
-                        </a>
-                    </div>
-
-                    <!-- Badge Card 2 -->
-                    <div class="group glass-card rounded-2xl p-5 border border-slate-800/80 hover:border-slate-700/80 premium-transition flex flex-col items-center text-center space-y-3">
-                        <div class="w-24 h-24 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-center overflow-hidden relative">
-                            <img src="badge2.png" alt="Badge 2" class="w-full h-full object-contain p-2 group-hover:scale-105 premium-transition" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="absolute inset-0 hidden flex-col items-center justify-center text-indigo-500">
-                                <i class="fas fa-shield-alt text-2xl"></i>
-                            </div>
-                        </div>
-                        <div class="space-y-1">
-                            <h5 class="text-sm font-bold text-white">AI Skills Fest 2026</h5>
-                            <p class="text-[11px] text-slate-500 mono uppercase tracking-wide">Microsoft</p>
-                        </div>
-                        <a href="https://www.credly.com/badges/38c6d040-12f8-4106-a671-e11b2f6156f8/public_url" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center space-x-1.5 px-3 py-2 rounded-lg bg-slate-900 hover:bg-indigo-600 border border-slate-800 hover:border-indigo-500 text-slate-300 hover:text-white font-medium text-[10px] tracking-wider uppercase premium-transition">
-                            <span>Verify</span>
-                            <i class="fas fa-arrow-up-right-from-square text-[8px]"></i>
-                        </a>
-                    </div>
-
-                    <!-- Badge Card 3 -->
-                    <div class="group glass-card rounded-2xl p-5 border border-slate-800/80 hover:border-slate-700/80 premium-transition flex flex-col items-center text-center space-y-3">
-                        <div class="w-24 h-24 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-center overflow-hidden relative">
-                            <img src="badge3.png" alt="Badge 3" class="w-full h-full object-contain p-2 group-hover:scale-105 premium-transition" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="absolute inset-0 hidden flex-col items-center justify-center text-blue-500">
-                                <i class="fas fa-shield-alt text-2xl"></i>
-                            </div>
-                        </div>
-                        <div class="space-y-1">
-                            <h5 class="text-sm font-bold text-white">Introduction to Cybersecurity</h5>
-                            <p class="text-[11px] text-slate-500 mono uppercase tracking-wide">Cisco</p>
-                        </div>
-                        <a href="https://www.credly.com/badges/a59c267c-8370-479f-a0c0-fcaf9778f11c/public_url" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center space-x-1.5 px-3 py-2 rounded-lg bg-slate-900 hover:bg-blue-600 border border-slate-800 hover:border-blue-500 text-slate-300 hover:text-white font-medium text-[10px] tracking-wider uppercase premium-transition">
-                            <span>Verify</span>
-                            <i class="fas fa-arrow-up-right-from-square text-[8px]"></i>
-                        </a>
-                    </div>
-
-                    <!-- Badge Card 4 -->
-                    <div class="group glass-card rounded-2xl p-5 border border-slate-800/80 hover:border-slate-700/80 premium-transition flex flex-col items-center text-center space-y-3">
-                        <div class="w-24 h-24 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-center overflow-hidden relative">
-                            <img src="badge4.png" alt="Badge 4" class="w-full h-full object-contain p-2 group-hover:scale-105 premium-transition" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="absolute inset-0 hidden flex-col items-center justify-center text-indigo-500">
-                                <i class="fas fa-shield-alt text-2xl"></i>
-                            </div>
-                        </div>
-                        <div class="space-y-1">
-                            <h5 class="text-sm font-bold text-white">Google Analytics</h5>
-                            <p class="text-[11px] text-slate-500 mono uppercase tracking-wide">Skillshop(Google)</p>
-                        </div>
-                        <a href="https://skillshop.credential.net/96a048c8-a885-4d87-be35-c230e13449fa#acc.lKRvku9w" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center space-x-1.5 px-3 py-2 rounded-lg bg-slate-900 hover:bg-indigo-600 border border-slate-800 hover:border-indigo-500 text-slate-300 hover:text-white font-medium text-[10px] tracking-wider uppercase premium-transition">
-                            <span>Verify</span>
-                            <i class="fas fa-arrow-up-right-from-square text-[8px]"></i>
-                        </a>
-                    </div>
-
-                    <!-- Add more badge cards here by duplicating a block above (badge5.png, badge6.png ...) -->
-
-                </div>
-
-                <!-- Optional: full Credly profile link -->
-                <div class="w-full glass-card border border-slate-800/80 rounded-2xl p-5 flex flex-col md:flex-row items-center justify-between gap-4 relative overflow-hidden shimmer-trigger">
-                    <div class="flex items-center space-x-4 text-left">
-                        <div class="w-10 h-10 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-center text-blue-500 text-lg shrink-0">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <p class="text-sm text-slate-400">See every badge in one place on the full Credly profile.</p>
-                    </div>
-                    <!-- Apni Credly profile link yahan add karein -->
-                    <a href="https://www.credly.com/users/aradhya-dwivedi" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-xl bg-blue-600/10 hover:bg-blue-600 border border-blue-500/30 text-blue-400 hover:text-white font-medium text-xs tracking-wider uppercase whitespace-nowrap premium-transition shadow-sm flex items-center space-x-2 w-full md:w-auto justify-center">
-                        <span>Open Full Credly Profile</span>
-                        <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- 6. SELECTED WORKS / REPOSITORIES -->
-        <section id="projects" class="space-y-12">
-            <div class="space-y-4 max-w-xl">
-                <div class="text-xs font-semibold tracking-widest text-blue-500 uppercase">Functional Architectures</div>
-                <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Engineering Projects</h2>
-                <p class="text-sm text-slate-400">Selected codebases mapping theoretical computing modules into functional application logic. Full source lives in one demo repository, each project ships with a live preview.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-
-                <!-- Project 1: Creative Coding Three.js Simulator -->
-                <div class="group glass-card rounded-2xl overflow-hidden border border-slate-800/80 hover:border-slate-700/80 premium-transition">
-                    <div class="h-44 bg-slate-950 border-b border-slate-900 relative p-6 flex flex-col justify-between overflow-hidden">
-                        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px] group-hover:scale-105 premium-transition"></div>
-                        <div class="flex justify-between items-center relative z-10">
-                            <div class="w-10 h-10 rounded-lg bg-blue-600/10 border border-blue-500/20 flex items-center justify-center text-blue-400 text-sm font-semibold">3D</div>
-                            <span class="text-[10px] text-emerald-400 font-medium tracking-widest uppercase mono bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">Active Engine</span>
-                        </div>
-                        <div class="mono text-xs text-slate-600 relative z-10">theCampusly</div>
-                    </div>
-
-                    <div class="p-6 space-y-4">
-                        <h3 class="text-lg font-bold text-white group-hover:text-blue-400 premium-transition tracking-tight">Campusly (A Student Tracker Web App)</h3>
-                        <p class="text-sm text-slate-400 leading-relaxed font-normal">
-                            Developed a interactive Attendance Tracker WebApp using <span class="text-slate-200">html</span>.
-                        </p>
-
-                        <div class="pt-2 flex flex-wrap gap-2 text-xs font-medium text-slate-400">
-                            <span class="px-2 py-1 rounded bg-slate-900 border border-slate-800/60">HTML</span>
-                            <span class="px-2 py-1 rounded bg-slate-900 border border-slate-800/60">JavaScript API</span>
-                            <span class="px-2 py-1 rounded bg-slate-900 border border-slate-800/60">WebGL Framework</span>
-                        </div>
-
-                        <!-- Yahan apni specific demo-repo folder link aur live-hosted link daalein -->
-                        <div class="pt-4 border-t border-slate-800/40 flex items-center gap-3 text-sm font-medium">
-                            <a href="https://github.com/aradhya-dwivedi/thecampusly" target="_blank" rel="noopener noreferrer" class="flex-1 inline-flex items-center justify-center space-x-2 px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-600 text-slate-300 hover:text-white premium-transition text-xs uppercase tracking-wide">
-                                <i class="fab fa-github text-sm"></i>
-                                <span>View Code</span>
-                            </a>
-                            <a href="https://aradhya-dwivedi.github.io/thecampusly/" target="_blank" rel="noopener noreferrer" class="flex-1 inline-flex items-center justify-center space-x-2 px-3 py-2.5 rounded-xl bg-blue-600/10 border border-blue-500/30 text-blue-400 hover:bg-blue-600 hover:text-white premium-transition text-xs uppercase tracking-wide">
-                                <i class="fas fa-eye text-sm"></i>
-                                <span>Live Demo</span>
-                            </a>
-                        </div>
+        <!-- PROJECTS -->
+        <section id="projects" class="section">
+            <div class="wrap">
+                <div class="section-head">
+                    <div>
+                        <h2><span class="h-icon"><svg class="ic" aria-hidden="true"><use href="#i-monitor"/></svg></span>Projects</h2>
+                        <p class="sub">Source code and a live version of each.</p>
                     </div>
                 </div>
 
-                <!-- Project 2: Java Algorithmic Stack -->
-                <div class="group glass-card rounded-2xl overflow-hidden border border-slate-800/80 hover:border-slate-700/80 premium-transition">
-                    <div class="h-44 bg-slate-950 border-b border-slate-900 relative p-6 flex flex-col justify-between overflow-hidden">
-                        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#6366f1_1px,transparent_1px)] [background-size:16px_16px] group-hover:scale-105 premium-transition"></div>
-                        <div class="flex justify-between items-center relative z-10">
-                            <div class="w-10 h-10 rounded-lg bg-indigo-600/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 text-sm font-semibold">ALG</div>
-                            <span class="text-[10px] text-slate-500 font-medium tracking-widest uppercase mono bg-slate-900 px-2 py-0.5 rounded border border-slate-800">Verified Base</span>
-                        </div>
-                        <div class="mono text-xs text-slate-600 relative z-10">Portfolio</div>
-                    </div>
+                <div class="projects">
 
-                    <div class="p-6 space-y-4">
-                        <h3 class="text-lg font-bold text-white group-hover:text-indigo-400 premium-transition tracking-tight">Portfolio</h3>
-                        <p class="text-sm text-slate-400 leading-relaxed font-normal">
-                         Designed structural Portfolio matrixe using <span class="text-slate-200">HTML</span> computing memory layout nodes, functional stack pipelines, linear tree tracers, and mathematical evaluation functions optimized for zero data leak compilation.                        </p>
-
-                        <div class="pt-2 flex flex-wrap gap-2 text-xs font-medium text-slate-400">
-                            <span class="px-2 py-1 rounded bg-slate-900 border border-slate-800/60">HTML Engine</span>
-                            <span class="px-2 py-1 rounded bg-slate-900 border border-slate-800/60">Algorithmic Arrays</span>
-                            <span class="px-2 py-1 rounded bg-slate-900 border border-slate-800/60">Data Infrastructure</span>
+                    <!-- Project 1 -->
+                    <article class="project">
+                        <div class="project-head"><span class="h-icon"><svg class="ic" aria-hidden="true"><use href="#i-calendar-check"/></svg></span><h3>Campusly</h3></div>
+                        <p class="kind">A student attendance tracker web app</p>
+                        <p class="desc">An interactive attendance tracker for students, built as a web app with HTML and JavaScript.</p>
+                        <ul class="tags">
+                            <li>HTML</li>
+                            <li>JavaScript</li>
+                        </ul>
+                        <div class="project-links">
+                            <a href="https://github.com/aradhya-dwivedi/thecampusly" target="_blank" rel="noopener noreferrer" class="btn btn-line btn-sm"><svg class="ic" aria-hidden="true"><use href="#i-github"/></svg> View code</a>
+                            <a href="https://aradhya-dwivedi.github.io/thecampusly/" target="_blank" rel="noopener noreferrer" class="btn btn-solid btn-sm"><svg class="ic" aria-hidden="true"><use href="#i-eye"/></svg> Live demo</a>
                         </div>
+                    </article>
 
-                        <div class="pt-4 border-t border-slate-800/40 flex items-center gap-3 text-sm font-medium">
-                            <a href="https://github.com/aradhya-dwivedi/portfolio" target="_blank" rel="noopener noreferrer" class="flex-1 inline-flex items-center justify-center space-x-2 px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-600 text-slate-300 hover:text-white premium-transition text-xs uppercase tracking-wide">
-                                <i class="fab fa-github text-sm"></i>
-                                <span>View Code</span>
-                            </a>
-                            <a href="https://portfolio-eta-navy-wfof8an4wl.vercel.app/" target="_blank" rel="noopener noreferrer" class="flex-1 inline-flex items-center justify-center space-x-2 px-3 py-2.5 rounded-xl bg-indigo-600/10 border border-indigo-500/30 text-indigo-400 hover:bg-indigo-600 hover:text-white premium-transition text-xs uppercase tracking-wide">
-                                <i class="fas fa-eye text-sm"></i>
-                                <span>Live Demo</span>
-                            </a>
+                    <!-- Project 2 -->
+                    <article class="project">
+                        <div class="project-head"><span class="h-icon"><svg class="ic" aria-hidden="true"><use href="#i-globe"/></svg></span><h3>Portfolio</h3></div>
+                        <p class="kind">A personal portfolio website</p>
+                        <p class="desc">The portfolio site itself, a personal page covering education, credentials and projects.</p>
+                        <ul class="tags">
+                            <li>HTML</li>
+                        </ul>
+                        <div class="project-links">
+                            <a href="https://github.com/aradhya-dwivedi/portfolio" target="_blank" rel="noopener noreferrer" class="btn btn-line btn-sm"><svg class="ic" aria-hidden="true"><use href="#i-github"/></svg> View code</a>
+                            <a href="https://portfolio-eta-navy-wfof8an4wl.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-solid btn-sm"><svg class="ic" aria-hidden="true"><use href="#i-eye"/></svg> Live demo</a>
                         </div>
-                    </div>
+                    </article>
+
                 </div>
-
             </div>
         </section>
 
     </main>
 
 
-    <!-- 8. PROFESSIONAL MONOCHROMATIC CONNECT FOOTER -->
-    <footer id="connect" class="bg-slate-950 border-t border-slate-900 relative z-10">
-        <div class="max-w-7xl mx-auto px-6 py-16 space-y-12">
+    <!-- CONTACT -->
+    <footer id="connect" class="connect">
+        <div class="wrap">
+            <h2><span class="h-icon"><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg></span>Get in touch</h2>
+            <p class="sub">Reach out for technical collaborations, code reviews or engineering projects.</p>
 
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center pb-12 border-b border-slate-900">
-                <div class="md:col-span-6 space-y-3 text-center md:text-left">
-                    <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Establish Connection Node</h2>
-                    <p class="text-sm text-slate-400 max-w-md">Reach out for core technical collaborations, code auditing, or system engineering assignments.</p>
-                </div>
+            <a href="mailto:dwivediiaradhya@gmail.com" class="mail-link" title="Send an email"><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg>dwivediiaradhya@gmail.com</a>
 
-                <div class="md:col-span-6 flex justify-center md:justify-end items-center gap-6">
-                    <!-- GitHub Link -->
-                    <a href="https://github.com/aradhya-dwivedi" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-800 hover:border-slate-700 hover:shadow-lg hover:shadow-white/[0.02] premium-transition text-xl" title="Open GitHub Interface">
-                        <i class="fab fa-github"></i>
-                    </a>
-
-                    <!-- LinkedIn Link -->
-                    <a href="https://linkedin.com/in/dwivediiaradhya" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-[#0077b5] hover:bg-slate-800 hover:border-slate-700 hover:shadow-lg hover:shadow-blue-500/[0.02] premium-transition text-xl" title="Open LinkedIn Network">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-
-                    <!-- Gmail Link -->
-                    <a href="mailto:dwivediiaradhya@gmail.com" class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-[#ea4335] hover:bg-slate-800 hover:border-slate-700 hover:shadow-lg hover:shadow-red-500/[0.02] premium-transition text-xl" title="Trigger Email Channel Instance">
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                </div>
+            <div class="socials">
+                <a href="https://github.com/aradhya-dwivedi" target="_blank" rel="noopener noreferrer" class="social" title="Open GitHub" aria-label="GitHub">
+                    <svg class="ic" aria-hidden="true"><use href="#i-github"/></svg>
+                </a>
+                <a href="https://linkedin.com/in/dwivediiaradhya" target="_blank" rel="noopener noreferrer" class="social" title="Open LinkedIn" aria-label="LinkedIn">
+                    <svg class="ic" aria-hidden="true"><use href="#i-linkedin"/></svg>
+                </a>
+                <a href="mailto:dwivediiaradhya@gmail.com" class="social" title="Send an email" aria-label="Email">
+                    <svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg>
+                </a>
             </div>
 
-            <!-- Academic Footer Attributions System Info -->
-            <div class="flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 gap-4 mono">
-                <div class="space-y-1 text-center sm:text-left">
-                    <div>Operator Identity: Aradhya Dwivedi</div>
-                    <div class="text-slate-600">B.Tech CSE Undergraduate Instance • CSJMU Enrollment</div>
-                </div>
-                <div class="text-center sm:text-right space-y-1">
-                    <div>© 2026 Aradhya Dwivedi. All Rights Reserved.</div>
-                    <div class="text-slate-600">Built via Semantic System Modules • Executive Design Grade</div>
-                </div>
+            <div class="foot">
+                <span>© 2026 Aradhya Dwivedi. All rights reserved.</span>
+                <span><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg>B.Tech CSE student at CSJMU, Kanpur</span>
             </div>
-
         </div>
     </footer>
 
     <script>
-        function updateThemeIcon() {
-            var icon = document.getElementById('theme-icon');
-            var isLight = document.documentElement.classList.contains('light-mode');
-            icon.className = isLight ? 'fas fa-moon text-base' : 'fas fa-sun text-base';
-        }
 
         function toggleTheme() {
-            document.documentElement.classList.toggle('light-mode');
-            var isLight = document.documentElement.classList.contains('light-mode');
-            try { localStorage.setItem('theme', isLight ? 'light' : 'dark'); } catch (e) {}
-            updateThemeIcon();
+            document.documentElement.classList.toggle('dark-mode');
+            var isDark = document.documentElement.classList.contains('dark-mode');
+            try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch (e) {}
         }
 
         function scrollCarousel(id, direction) {
             var track = document.getElementById(id);
-            var card = track.querySelector('.carousel-card');
-            var gap = 24; // matches gap-6
+            var card = track.querySelector('.cert');
+            var gap = parseFloat(getComputedStyle(track).columnGap) || 16;
             var distance = card ? card.offsetWidth + gap : 320;
             track.scrollBy({ left: direction * distance, behavior: 'smooth' });
         }
 
-        document.addEventListener('DOMContentLoaded', updateThemeIcon);
+        function updateArrows() {
+            var track = document.getElementById('cert-carousel');
+            var prev = document.getElementById('cert-prev');
+            var next = document.getElementById('cert-next');
+            if (!track || !prev || !next) return;
+            prev.disabled = track.scrollLeft <= 4;
+            next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var track = document.getElementById('cert-carousel');
+            if (track) {
+                track.addEventListener('scroll', updateArrows, { passive: true });
+                window.addEventListener('resize', updateArrows);
+                updateArrows();
+            }
+        });
     </script>
 
 </body>
